@@ -18,6 +18,10 @@
 
 SCRIPT_DIR=$(cd $(dirname "$0"); pwd)
 
+if [ "${CUR_DIR}" != "" ]; then
+    cd ${CUR_DIR}
+fi
+
 #
 # Discovers path to Java executable and checks it's version.
 # The function exports JAVA variable with path to Java executable.
