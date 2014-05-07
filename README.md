@@ -26,13 +26,13 @@ The following GridGain benchmark properties can be defined in the benchmark conf
 * `-dm <mode>` - GridGain distribution mode
 * `-wo <mode>` - GridGain write order mode
 * `-txc <mode>` - GridGain transaction concurrency control
-* `-txi <time>` - GridGain transaction isolation
+* `-txi <mode>` - GridGain transaction isolation
 * `-ot` - flag indicating whether offheap mode is on
 * `-ov` - flag indicating whether offheap mode is on and only cache values are stored offheap
 * `-rtp <num>` - REST TCP port, if this property is defined it indicates that a GridGain node is ready to process GridGain Clients
 * `-rth <host>` - REST TCP host
 * `-ss` - flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
-* `-range` - range of keys that are randomly generated for cache operations
+* `-range <num>` - range of keys that are randomly generated for cache operations
 
 ## Maven Install
 The easiest way to get started with Yardstick GridGain in your project is to use Maven dependency management:
