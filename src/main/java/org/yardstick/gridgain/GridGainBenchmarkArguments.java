@@ -17,7 +17,6 @@ package org.yardstick.gridgain;
 import com.beust.jcommander.*;
 import org.gridgain.grid.cache.*;
 import org.gridgain.grid.util.typedef.internal.*;
-import org.yardstick.util.*;
 
 /**
  * Input arguments for GridGain benchmarks.
@@ -187,8 +186,7 @@ public class GridGainBenchmarkArguments {
     /**
      * @return Short string.
      */
-    @BenchmarkToShortString
-    public String toShortString() {
+    public String parametersToString() {
         return "-nn=" + nodes + "_-b=" + backups + "_sm=" + syncMode + "_dm=" + distroMode +
                 (orderMode == null ? "" : "_wo=" + orderMode);
     }

@@ -20,7 +20,7 @@ import org.gridgain.grid.cache.eviction.lru.*;
 import org.gridgain.grid.spi.communication.tcp.*;
 import org.gridgain.grid.util.typedef.*;
 import org.yardstick.*;
-import org.yardstick.util.*;
+import org.yardstick.impl.util.*;
 
 import static org.gridgain.grid.cache.GridCacheMemoryMode.*;
 
@@ -85,6 +85,11 @@ public class GridGainNode implements BenchmarkServer {
     /** {@inheritDoc} */
     @Override public void stop() throws Exception {
         G.stopAll(true);
+    }
+
+    /** {@inheritDoc} */
+    @Override public String usage() {
+        return BenchmarkUtils.usage(new GridGainBenchmarkArguments());
     }
 
     /**

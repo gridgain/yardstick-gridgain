@@ -19,7 +19,7 @@ import org.gridgain.grid.cache.*;
 import org.gridgain.grid.events.*;
 import org.gridgain.grid.lang.*;
 import org.yardstick.*;
-import org.yardstick.util.*;
+import org.yardstick.impl.util.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -37,8 +37,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
     private final String cacheName;
 
     /** Arguments. */
-    @BenchmarkIncludeToUsage
-    protected GridGainBenchmarkArguments args;
+    protected final GridGainBenchmarkArguments args = new GridGainBenchmarkArguments();
 
     /** Node. */
     private final GridGainNode node = new GridGainNode();
@@ -57,8 +56,6 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
 
-        args = new GridGainBenchmarkArguments();
-
         BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
 
         node.start(cfg);
@@ -73,6 +70,16 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
     /** {@inheritDoc} */
     @Override public void tearDown() throws Exception {
         node.stop();
+    }
+
+    /** {@inheritDoc} */
+    @Override public String description() {
+        return args.parametersToString() + '_' + super.description();
+    }
+
+    /** {@inheritDoc} */
+    @Override public String usage() {
+        return BenchmarkUtils.usage(args);
     }
 
     /**
