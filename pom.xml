@@ -23,6 +23,47 @@
     <name>Yardstick GridGain</name>
     <version>1.0.0</version>
 
+    <url>https://github.com/gridgain/yardstick-gridgain</url>
+    <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/gridgain/yardstick-gridgain</url>
+        <connection>scm:git:git://github.com/gridgain/yardstick-gridgain.git</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>nivanov</id>
+            <name>Nikita Ivanov</name>
+            <email>nivanov@gridgain.com</email>
+        </developer>
+        <developer>
+            <id>dsetrakyan</id>
+            <name>Dmitriy Setrakyan</name>
+            <email>dsetrakyan@gridgain.com</email>
+        </developer>
+        <developer>
+            <id>yzhdanov</id>
+            <name>Yakov Zhdanov</name>
+            <email>yzhdanov@gridgain.com</email>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <!-- Staging repository, will be removed after Yardstick is released. -->
+            <id>test-yardstick-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/central_bundles-2076</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -63,9 +104,7 @@
         <dependency>
             <groupId>org.yardstick</groupId>
             <artifactId>yardstick</artifactId>
-            <scope>system</scope>
             <version>1.0.0</version>
-            <systemPath>${basedir}/libs/yardstick-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -83,6 +122,25 @@
                             <outputDirectory>${basedir}/libs</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.yardstick</groupId>
+                                    <artifactId>yardstick</artifactId>
+                                    <version>1.0.0</version>
+                                    <type>zip</type>
+                                    <classifier>resources</classifier>
+                                    <outputDirectory>${basedir}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -92,23 +150,6 @@
                 <configuration>
                     <outputDirectory>${basedir}</outputDirectory>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <unzip src="${basedir}/libs/yardstick-resources-1.0.0.zip" dest="${basedir}"/>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

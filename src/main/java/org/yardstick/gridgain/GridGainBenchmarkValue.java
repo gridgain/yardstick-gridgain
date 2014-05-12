@@ -14,8 +14,6 @@
 
 package org.yardstick.gridgain;
 
-import org.gridgain.grid.util.typedef.internal.*;
-
 import java.io.*;
 
 /**
@@ -56,6 +54,6 @@ public class GridGainBenchmarkValue implements Externalizable {
 
     /** {@inheritDoc} */
     @Override public String toString() {
-        return S.toString(GridGainBenchmarkValue.class, this);
+        return "Value [id=" + id + ']';
     }
 }
