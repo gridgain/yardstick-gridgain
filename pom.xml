@@ -60,7 +60,7 @@
         <repository>
             <!-- Staging repository, will be removed after Yardstick is released. -->
             <id>test-yardstick-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/central_bundles-2079</url>
+            <url>https://oss.sonatype.org/content/repositories/central_bundles-2082</url>
         </repository>
     </repositories>
 
