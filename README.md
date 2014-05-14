@@ -18,8 +18,8 @@ The procedure of benchmarks run is the same as described in Yardstick
 
 The following GridGain benchmark properties can be defined in the benchmark configuration:
 
-* `-nn <num>` - number of nodes, it is used by the benchmark to wait for the specified number of nodes are started,
-    to not start the benchmark while not all nodes are ready
+* `-nn <num>` - number of nodes, it is used by the benchmark driver to wait for the specified number of nodes are started,
+    to not start the driver while not all nodes are ready
 * `-b <num>` - number of backups
 * `-cfg <path>` - GridGain configuration file
 * `-sm <mode>` - GridGain synchronization mode
