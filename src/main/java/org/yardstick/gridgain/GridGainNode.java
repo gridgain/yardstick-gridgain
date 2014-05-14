@@ -18,9 +18,7 @@ import org.gridgain.grid.*;
 import org.gridgain.grid.cache.*;
 import org.gridgain.grid.cache.eviction.lru.*;
 import org.gridgain.grid.spi.communication.tcp.*;
-import org.gridgain.grid.util.typedef.*;
 import org.yardstick.*;
-import org.yardstick.impl.util.*;
 
 import static org.gridgain.grid.cache.GridCacheMemoryMode.*;
 
@@ -37,7 +35,7 @@ public class GridGainNode implements BenchmarkServer {
 
         BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-node>");
 
-        GridConfiguration c = G.loadConfiguration(args.configuration()).get1();
+        GridConfiguration c = GridGain.loadConfiguration(args.configuration()).get1();
 
         assert c != null;
 
@@ -79,12 +77,12 @@ public class GridGainNode implements BenchmarkServer {
 
         c.setCommunicationSpi(commSpi);
 
-        grid = G.start(c);
+        grid = GridGain.start(c);
     }
 
     /** {@inheritDoc} */
     @Override public void stop() throws Exception {
-        G.stopAll(true);
+        GridGain.stopAll(true);
     }
 
     /** {@inheritDoc} */
