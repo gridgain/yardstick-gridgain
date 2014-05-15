@@ -35,6 +35,13 @@ if this property is defined it indicates that a GridGain node is ready to proces
 * `-ss` or `--syncSend` - flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
 * `-r <num>` or `--range` - range of keys that are randomly generated for cache operations
 
+For example if we need to run GridGainNode server on localhost and GridGainPutBenchmark benchmark on localhost, 
+number of backups is 1, synchronization mode is PRIMARY_SYNC 
+then the following configuration should be specified in run properties file:
+
+* `HOSTS=localhost` 
+* `CONFIGS="-b 1 -sm PRIMARY_SYNC -dn GridGainPutBenchmark -sn GridGainNode"`
+
 ## Maven Install
 The easiest way to get started with Yardstick GridGain in your project is to use Maven dependency management:
 
