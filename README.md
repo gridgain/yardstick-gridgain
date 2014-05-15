@@ -18,21 +18,22 @@ The procedure of benchmarks run is the same as described in Yardstick
 
 The following GridGain benchmark properties can be defined in the benchmark configuration:
 
-* `-nn <num>` - number of nodes, it is used by the benchmark driver to wait for the specified number of nodes are started,
+* `-nn <num>` or `--nodeNumber <num>` - number of nodes, it is used by the benchmark driver to wait for the specified number of nodes are started,
     to not start the driver while not all nodes are ready
-* `-b <num>` - number of backups
-* `-cfg <path>` - GridGain configuration file
-* `-sm <mode>` - GridGain synchronization mode
-* `-dm <mode>` - GridGain distribution mode
-* `-wo <mode>` - GridGain write order mode
-* `-txc <mode>` - GridGain transaction concurrency control
-* `-txi <mode>` - GridGain transaction isolation
-* `-ot` - flag indicating whether offheap mode is on
-* `-ov` - flag indicating whether offheap mode is on and only cache values are stored offheap
-* `-rtp <num>` - REST TCP port, if this property is defined it indicates that a GridGain node is ready to process GridGain Clients
-* `-rth <host>` - REST TCP host
-* `-ss` - flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
-* `-range <num>` - range of keys that are randomly generated for cache operations
+* `-b <num>` or `--backups <num>` - number of backups
+* `-ggcfg <path>` or `--ggConfig <path>` - GridGain configuration file
+* `-sm <mode>` or `-syncMode <mode>` - GridGain synchronization mode
+* `-dm <mode>` or `--distroMode <mode>` - GridGain distribution mode
+* `-wom <mode>` or `--writeOrderMode <mode>` - GridGain write order mode
+* `-txc <value>` or `--txConcurrency <value>` - GridGain transaction concurrency control
+* `-txi <value>` or `--txIsolation <value>` - GridGain transaction isolation
+* `-ot` or `--offheapTiered` - flag indicating whether offheap mode is on
+* `-ov` or `--offheapValuesOnly` - flag indicating whether offheap mode is on and only cache values are stored offheap
+* `-rtp <num>`  or `--restPort <num>` - REST TCP port, 
+if this property is defined it indicates that a GridGain node is ready to process GridGain Clients
+* `-rth <host>` or `--restHost <host>` - REST TCP host
+* `-ss` or `--syncSend` - flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
+* `-r <num>` or `--range` - range of keys that are randomly generated for cache operations
 
 ## Maven Install
 The easiest way to get started with Yardstick GridGain in your project is to use Maven dependency management:

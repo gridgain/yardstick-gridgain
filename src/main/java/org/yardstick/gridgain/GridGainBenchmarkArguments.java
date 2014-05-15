@@ -24,58 +24,58 @@ import org.gridgain.grid.util.typedef.internal.*;
 @SuppressWarnings({"UnusedDeclaration", "FieldCanBeLocal"})
 public class GridGainBenchmarkArguments {
     /** */
-    @Parameter(names = "-nn", description = "Node number")
+    @Parameter(names = {"-nn", "--nodeNumber"}, description = "Node number")
     private int nodes = 1;
 
     /** */
-    @Parameter(names = "-b", description = "Backups")
+    @Parameter(names = {"-b", "--backups"}, description = "Backups")
     private int backups;
 
-    @Parameter(names = "-cfg", description = "Configuration file")
+    @Parameter(names = {"-ggcfg", "--ggConfig"}, description = "Configuration file")
     private String cfg = "config/gridgain-benchmark-config.xml";
 
     /** */
-    @Parameter(names = "-sm", description = "Synchronization Mode")
+    @Parameter(names = {"-sm", "--syncMode"}, description = "Synchronization mode")
     private GridCacheWriteSynchronizationMode syncMode = GridCacheWriteSynchronizationMode.PRIMARY_SYNC;
 
     /** */
-    @Parameter(names = "-dm", description = "Distribution mode")
+    @Parameter(names = {"-dm", "--distroMode"}, description = "Distribution mode")
     private GridCacheDistributionMode distroMode = GridCacheDistributionMode.PARTITIONED_ONLY;
 
     /** */
-    @Parameter(names = "-wo", description = "Write Ordering Mode")
+    @Parameter(names = {"-wom", "--writeOrderMode"}, description = "Write ordering mode")
     private GridCacheAtomicWriteOrderMode orderMode;
 
     /** */
-    @Parameter(names = "-txc", description = "Transaction Concurrency")
+    @Parameter(names = {"-txc", "--txConcurrency"}, description = "Transaction concurrency")
     private GridCacheTxConcurrency txConcurrency = GridCacheTxConcurrency.OPTIMISTIC;
 
     /** */
-    @Parameter(names = "-txi", description = "Transaction Isolation")
+    @Parameter(names = {"-txi", "--txIsolation"}, description = "Transaction isolation")
     private GridCacheTxIsolation txIsolation = GridCacheTxIsolation.REPEATABLE_READ;
 
     /** */
-    @Parameter(names = "-ot", description = "Tiered Offheap")
+    @Parameter(names = {"-ot", "--offheapTiered"}, description = "Tiered offheap")
     private boolean offheapTiered;
 
     /** */
-    @Parameter(names = "-ov", description = "Offheap Values Only")
+    @Parameter(names = {"-ov", "--offheapValuesOnly"}, description = "Offheap values only")
     private boolean offheapVals;
 
     /** */
-    @Parameter(names = "-rtp", description = "REST TCP port")
+    @Parameter(names = {"-rtp", "--restPort"}, description = "REST TCP port")
     private int restTcpPort;
 
     /** */
-    @Parameter(names = "-rth", description = "REST TCP host")
+    @Parameter(names = {"-rth", "--restHost"}, description = "REST TCP host")
     private String restTcpHost;
 
     /** */
-    @Parameter(names = "-ss", description = "Synchronous send")
+    @Parameter(names = {"-ss", "--syncSend"}, description = "Synchronous send")
     private boolean syncSnd;
 
     /** */
-    @Parameter(names = "-range", description = "Key range")
+    @Parameter(names = {"-r", "--range"}, description = "Key range")
     private int range = 1_000_000;
 
     /**
