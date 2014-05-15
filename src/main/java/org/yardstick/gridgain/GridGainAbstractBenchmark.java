@@ -23,6 +23,7 @@ import org.yardstick.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
 import static org.gridgain.grid.events.GridEventType.*;
 
 /**
@@ -39,7 +40,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
     protected final GridGainBenchmarkArguments args = new GridGainBenchmarkArguments();
 
     /** Node. */
-    private final GridGainNode node = new GridGainNode();
+    private GridGainNode node;
 
     /** Cache. */
     protected GridCache<Integer, Object> cache;
@@ -56,6 +57,8 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
         super.setUp(cfg);
 
         BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
+
+        node = new GridGainNode(args.distributionMode() == CLIENT_ONLY);
 
         node.start(cfg);
 

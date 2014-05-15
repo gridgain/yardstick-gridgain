@@ -20,6 +20,7 @@ import org.gridgain.grid.cache.eviction.lru.*;
 import org.gridgain.grid.spi.communication.tcp.*;
 import org.yardstick.*;
 
+import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
 import static org.gridgain.grid.cache.GridCacheMemoryMode.*;
 
 /**
@@ -28,6 +29,19 @@ import static org.gridgain.grid.cache.GridCacheMemoryMode.*;
 public class GridGainNode implements BenchmarkServer {
     /** Grid instance. */
     private Grid grid;
+
+    /** Client mode. */
+    private boolean clientMode;
+
+    /** */
+    public GridGainNode() {
+        // No-op.
+    }
+
+    /** */
+    public GridGainNode(boolean clientMode) {
+        this.clientMode = clientMode;
+    }
 
     /** {@inheritDoc} */
     @Override public void start(BenchmarkConfiguration cfg) throws Exception {
@@ -40,8 +54,13 @@ public class GridGainNode implements BenchmarkServer {
         assert c != null;
 
         for (GridCacheConfiguration cc : c.getCacheConfiguration()) {
+            // GridGainNode can not run in CLIENT_ONLY mode,
+            // except the case when it's used inside GridGainAbstractBenchmark.
+            GridCacheDistributionMode distroMode = args.distributionMode() == CLIENT_ONLY && !clientMode ?
+                PARTITIONED_ONLY : args.distributionMode();
+
             cc.setWriteSynchronizationMode(args.syncMode());
-            cc.setDistributionMode(args.distributionMode());
+            cc.setDistributionMode(distroMode);
 
             if (args.orderMode() != null)
                 cc.setAtomicWriteOrderMode(args.orderMode());
