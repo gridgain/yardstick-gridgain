@@ -31,7 +31,7 @@ public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
     @Override public void test() throws Exception {
         int key = nextRandom(0, args.range() / 2);
 
-        try (GridCacheTx tx = cache.txStart(args.txConcurrency(), args.txIsolation())) {
+        try (GridCacheTx tx = cache.txStart()) {
             Object val = cache.get(key);
 
             if (val != null)

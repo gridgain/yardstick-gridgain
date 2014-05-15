@@ -64,6 +64,9 @@ public class GridGainNode implements BenchmarkServer {
                 else
                     cc.setEvictionPolicy(new GridCacheLruEvictionPolicy(50000));
             }
+
+            cc.setDefaultTxConcurrency(args.txConcurrency());
+            cc.setDefaultTxIsolation(args.txIsolation());
         }
 
         GridTcpCommunicationSpi commSpi = (GridTcpCommunicationSpi)c.getCommunicationSpi();
