@@ -32,7 +32,7 @@ public class GridGainBenchmarkArguments {
     private int backups;
 
     @Parameter(names = {"-ggcfg", "--ggConfig"}, description = "Configuration file")
-    private String cfg = "config/gridgain-benchmark-config.xml";
+    private String ggcfg = "config/gridgain-benchmark-config.xml";
 
     /** */
     @Parameter(names = {"-sm", "--syncMode"}, description = "Synchronization mode")
@@ -180,7 +180,7 @@ public class GridGainBenchmarkArguments {
      * @return Configuration file.
      */
     public String configuration() {
-        return cfg;
+        return ggcfg;
     }
 
     /**
