@@ -22,11 +22,11 @@ import java.io.*;
  * Person record used for query test.
  */
 public class GridGainBenchmarkPerson implements Externalizable {
-    /** Person ID (create unique SQL index for this field). */
-    @GridCacheQuerySqlField(index = true, unique = true)
+    /** Person ID. */
+    @GridCacheQuerySqlField(index = true)
     private int id;
 
-    /** Organization ID (create non-unique SQL index for this field). */
+    /** Organization ID. */
     @GridCacheQuerySqlField(index = true)
     private int orgId;
 
@@ -38,7 +38,7 @@ public class GridGainBenchmarkPerson implements Externalizable {
     @GridCacheQuerySqlField
     private String lastName;
 
-    /** Salary (create non-unique SQL index for this field). */
+    /** Salary. */
     @GridCacheQuerySqlField(index = true)
     private double salary;
 

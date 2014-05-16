@@ -22,11 +22,11 @@ import java.io.*;
  * Organization record used for query test.
  */
 public class GridGainBenchmarkOrganization implements Externalizable {
-    /** Organization ID (create unique SQL-based index for this field). */
-    @GridCacheQuerySqlField(index = true, unique = true)
+    /** Organization ID. */
+    @GridCacheQuerySqlField(index = true)
     private int id;
 
-    /** Organization name (create non-unique SQL-based index for this field). */
+    /** Organization name. */
     @GridCacheQuerySqlField(index = true)
     private String name;
 
