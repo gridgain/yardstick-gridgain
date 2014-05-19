@@ -33,7 +33,7 @@ public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
     /** */
     public GridGainQueryBenchmark() {
         // Use cache "query" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-benchmark-config.xml' file.
+        // in 'config/gridgain-config.xml' file.
         super("query");
     }
 

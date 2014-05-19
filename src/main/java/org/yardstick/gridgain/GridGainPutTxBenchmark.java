@@ -21,7 +21,7 @@ public class GridGainPutTxBenchmark extends GridGainAbstractBenchmark {
     /** */
     public GridGainPutTxBenchmark() {
         // Use cache "tx" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-benchmark-config.xml' file.
+        // in 'config/gridgain-config.xml' file.
         super("tx");
     }
 
