@@ -31,9 +31,9 @@
                 <property name="requireSerializable" value="true"/>
                 <property name="classNames">
                     <list>
-                        <value>org.yardstick.gridgain.GridGainBenchmarkValue</value>
-                        <value>org.yardstick.gridgain.querymodel.GridGainBenchmarkPerson</value>
-                        <value>org.yardstick.gridgain.querymodel.GridGainBenchmarkOrganization</value>
+                        <value>org.yardstick.gridgain.SampleValue</value>
+                        <value>org.yardstick.gridgain.querymodel.Person</value>
+                        <value>org.yardstick.gridgain.querymodel.Organization</value>
                     </list>
                 </property>
             </bean>

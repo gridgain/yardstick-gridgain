@@ -30,6 +30,6 @@ public class GridGainPutTxBenchmark extends GridGainAbstractBenchmark {
         int key = nextRandom(args.range());
 
         // Implicit transaction is used.
-        cache.putx(key, new GridGainBenchmarkValue(key));
+        cache.putx(key, new SampleValue(key));
     }
 }

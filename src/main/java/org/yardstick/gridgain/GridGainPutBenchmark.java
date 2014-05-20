@@ -29,6 +29,6 @@ public class GridGainPutBenchmark extends GridGainAbstractBenchmark {
     @Override public void test() throws Exception {
         int key = nextRandom(args.range());
 
-        cache.putx(key, new GridGainBenchmarkValue(key));
+        cache.putx(key, new SampleValue(key));
     }
 }

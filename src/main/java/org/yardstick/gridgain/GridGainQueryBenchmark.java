@@ -45,9 +45,9 @@ public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
 
         long start = System.nanoTime();
 
-        try (GridDataLoader<Integer, GridGainBenchmarkPerson> dataLdr = grid().dataLoader(cache.name())) {
+        try (GridDataLoader<Integer, Person> dataLdr = grid().dataLoader(cache.name())) {
             for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
-                dataLdr.addData(i, new GridGainBenchmarkPerson(i, "firstName" + i, "lastName" + i, i * 1000));
+                dataLdr.addData(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
 
                 if (i % 100000 == 0)
                     cfg.output().println("Populated persons: " + i);
@@ -56,7 +56,7 @@ public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
 
         cfg.output().println("Finished populating query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
 
-        qry = cache.queries().createSqlQuery(GridGainBenchmarkPerson.class, "salary >= ? and salary <= ?");
+        qry = cache.queries().createSqlQuery(Person.class, "salary >= ? and salary <= ?");
     }
 
     /** {@inheritDoc} */
@@ -65,9 +65,9 @@ public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
 
         double maxSalary = salary + 1000;
 
-        Collection<GridGainBenchmarkPerson> persons = executeQuery(salary, maxSalary);
+        Collection<Person> persons = executeQuery(salary, maxSalary);
 
-        for (GridGainBenchmarkPerson p : persons) {
+        for (Person p : persons) {
             if (p.getSalary() < salary || p.getSalary() > maxSalary)
                 throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
                     ", person=" + p + ']');
@@ -80,14 +80,14 @@ public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
      * @return Query result.
      * @throws Exception If failed.
      */
-    private Collection<GridGainBenchmarkPerson> executeQuery(double minSalary, double maxSalary) throws Exception {
-        GridCacheQuery<Map.Entry<Integer, GridGainBenchmarkPerson>> q = (GridCacheQuery<Map.Entry<Integer, GridGainBenchmarkPerson>>)qry;
+    private Collection<Person> executeQuery(double minSalary, double maxSalary) throws Exception {
+        GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
-        Collection<Map.Entry<Integer, GridGainBenchmarkPerson>> res = q.execute(minSalary, maxSalary).get();
+        Collection<Map.Entry<Integer, Person>> res = q.execute(minSalary, maxSalary).get();
 
         return F.viewReadOnly(res,
-            new GridClosure<Map.Entry<Integer, GridGainBenchmarkPerson>, GridGainBenchmarkPerson>() {
-                @Override public GridGainBenchmarkPerson apply(Map.Entry<Integer, GridGainBenchmarkPerson> e) {
+            new GridClosure<Map.Entry<Integer, Person>, Person>() {
+                @Override public Person apply(Map.Entry<Integer, Person> e) {
                     return e.getValue();
                 }
             }

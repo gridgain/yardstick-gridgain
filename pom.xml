@@ -21,7 +21,7 @@
     <groupId>org.yardstick.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>1.0.0</version>
+    <version>0.5.0</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
@@ -50,7 +50,7 @@
         <repository>
             <!-- Staging repository, will be removed after Yardstick is released. -->
             <id>test-yardstick-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/central_bundles-2118</url>
+            <url>https://oss.sonatype.org/content/repositories/central_bundles-2124</url>
         </repository>
     </repositories>
 

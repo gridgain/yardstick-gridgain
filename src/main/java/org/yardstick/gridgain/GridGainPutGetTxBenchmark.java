@@ -37,7 +37,7 @@ public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
             if (val != null)
                 key = nextRandom(args.range() / 2, args.range());
 
-            cache.putx(key, new GridGainBenchmarkValue(key));
+            cache.putx(key, new SampleValue(key));
 
             tx.commit();
         }

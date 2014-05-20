@@ -21,7 +21,7 @@ import java.io.*;
 /**
  * Person record used for query test.
  */
-public class GridGainBenchmarkPerson implements Externalizable {
+public class Person implements Externalizable {
     /** Person ID. */
     @GridCacheQuerySqlField(index = true)
     private int id;
@@ -45,7 +45,7 @@ public class GridGainBenchmarkPerson implements Externalizable {
     /**
      * Constructs empty person.
      */
-    public GridGainBenchmarkPerson() {
+    public Person() {
         // No-op.
     }
 
@@ -57,7 +57,7 @@ public class GridGainBenchmarkPerson implements Externalizable {
      * @param lastName Last name.
      * @param salary Salary.
      */
-    public GridGainBenchmarkPerson(int id, String firstName, String lastName, double salary) {
+    public Person(int id, String firstName, String lastName, double salary) {
         this(id, 0, firstName, lastName, salary);
     }
 
@@ -70,7 +70,7 @@ public class GridGainBenchmarkPerson implements Externalizable {
      * @param lastName Last name.
      * @param salary Salary.
      */
-    public GridGainBenchmarkPerson(int id, int orgId, String firstName, String lastName, double salary) {
+    public Person(int id, int orgId, String firstName, String lastName, double salary) {
         this.id = id;
         this.orgId = orgId;
         this.firstName = firstName;
@@ -168,7 +168,7 @@ public class GridGainBenchmarkPerson implements Externalizable {
 
     /** {@inheritDoc} */
     @Override public boolean equals(Object o) {
-        return this == o || (o instanceof GridGainBenchmarkPerson) && id == ((GridGainBenchmarkPerson)o).id;
+        return this == o || (o instanceof Person) && id == ((Person)o).id;
     }
 
     /** {@inheritDoc} */

@@ -19,19 +19,19 @@ import java.io.*;
 /**
  * Entity class for benchmark.
  */
-public class GridGainBenchmarkValue implements Externalizable {
+public class SampleValue implements Externalizable {
     /** */
     private int id;
 
     /** */
-    public GridGainBenchmarkValue() {
+    public SampleValue() {
         // No-op.
     }
 
     /**
      * @param id Id.
      */
-    public GridGainBenchmarkValue(int id) {
+    public SampleValue(int id) {
         this.id = id;
     }
 

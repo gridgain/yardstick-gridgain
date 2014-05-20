@@ -50,14 +50,14 @@ public class GridGainQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
             // Populate organizations.
             for (int i = 0; i < orgRange && !Thread.currentThread().isInterrupted(); i++)
-                dataLdr.addData(i, new GridGainBenchmarkOrganization(i, "org" + i));
+                dataLdr.addData(i, new Organization(i, "org" + i));
 
             dataLdr.flush();
 
             // Populate persons.
             for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
-                GridGainBenchmarkPerson p =
-                    new GridGainBenchmarkPerson(i, RAND.nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
+                Person p =
+                    new Person(i, RAND.nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
 
                 dataLdr.addData(i, p);
 
@@ -80,9 +80,9 @@ public class GridGainQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
         double maxSalary = salary + 1000;
 
-        Collection<GridGainBenchmarkPerson> persons = executeQueryJoin(salary, maxSalary);
+        Collection<Person> persons = executeQueryJoin(salary, maxSalary);
 
-        for (GridGainBenchmarkPerson p : persons)
+        for (Person p : persons)
             if (p.getSalary() < salary || p.getSalary() > maxSalary)
                 throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
                     ", person=" + p + ']');
@@ -94,15 +94,15 @@ public class GridGainQueryJoinBenchmark extends GridGainAbstractBenchmark {
      * @return Query results.
      * @throws Exception If failed.
      */
-    private Collection<GridGainBenchmarkPerson> executeQueryJoin(double minSalary, double maxSalary) throws Exception {
+    private Collection<Person> executeQueryJoin(double minSalary, double maxSalary) throws Exception {
         GridCacheQuery<List<?>> q = (GridCacheQuery<List<?>>)qry;
 
         Collection<List<?>> res = q.execute(minSalary, maxSalary).get();
 
         return F.viewReadOnly(res,
-            new GridClosure<List<?>, GridGainBenchmarkPerson>() {
-                @Override public GridGainBenchmarkPerson apply(List<?> l) {
-                    GridGainBenchmarkPerson p = new GridGainBenchmarkPerson();
+            new GridClosure<List<?>, Person>() {
+                @Override public Person apply(List<?> l) {
+                    Person p = new Person();
 
                     p.setId((Integer)l.get(0));
                     p.setOrganizationId((Integer)l.get(1));

@@ -21,7 +21,7 @@ import java.io.*;
 /**
  * Organization record used for query test.
  */
-public class GridGainBenchmarkOrganization implements Externalizable {
+public class Organization implements Externalizable {
     /** Organization ID. */
     @GridCacheQuerySqlField(index = true)
     private int id;
@@ -33,7 +33,7 @@ public class GridGainBenchmarkOrganization implements Externalizable {
     /**
      * Constructs empty organization.
      */
-    public GridGainBenchmarkOrganization() {
+    public Organization() {
         // No-op.
     }
 
@@ -43,7 +43,7 @@ public class GridGainBenchmarkOrganization implements Externalizable {
      * @param id Organization ID.
      * @param name Organization name.
      */
-    public GridGainBenchmarkOrganization(int id, String name) {
+    public Organization(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -90,7 +90,7 @@ public class GridGainBenchmarkOrganization implements Externalizable {
 
     /** {@inheritDoc} */
     @Override public boolean equals(Object o) {
-        return this == o || (o instanceof GridGainBenchmarkOrganization) && id == ((GridGainBenchmarkOrganization)o).id;
+        return this == o || (o instanceof Organization) && id == ((Organization)o).id;
 
     }
 
