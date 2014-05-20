@@ -21,7 +21,7 @@
     <groupId>org.yardstick.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>1.0.0</version>
+    <version>0.5.0</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
@@ -50,7 +50,7 @@
         <repository>
             <!-- Staging repository, will be removed after Yardstick is released. -->
             <id>test-yardstick-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/central_bundles-2124</url>
+            <url>https://oss.sonatype.org/content/repositories/central_bundles-2125</url>
         </repository>
     </repositories>
 
@@ -59,6 +59,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <yardstick.version>LATEST</yardstick.version>
+        <gridgain.version>RELEASE</gridgain.version>
     </properties>
 
     <dependencies>
@@ -89,7 +90,7 @@
         <dependency>
             <groupId>org.gridgain</groupId>
             <artifactId>gridgain-platform</artifactId>
-            <version>6.1.0</version>
+            <version>${gridgain.version}</version>
         </dependency>
 
         <dependency>
@@ -140,6 +141,24 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <outputDirectory>${basedir}/libs</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/bin</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/libs</directory>
+                            <includes>
+                                <include>**/yardstick*.jar</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
