@@ -18,7 +18,8 @@ The procedure of benchmarks run is the same as described in Yardstick
 
 The following GridGain benchmark properties can be defined in the benchmark configuration:
 
-* `-nn <num>` or `--nodeNumber <num>` - number of nodes (automatically set in `benchmark.properties`), used to wait for the specified number of nodes to start
+* `-nn <num>` or `--nodeNumber <num>` - number of nodes (automatically set in `benchmark.properties`), 
+used to wait for the specified number of nodes to start
 * `-b <num>` or `--backups <num>` - number of backups
 * `-ggcfg <path>` or `--ggConfig <path>` - GridGain configuration file
 * `-sm <mode>` or `-syncMode <mode>` - GridGain synchronization mode
