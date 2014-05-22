@@ -20,7 +20,6 @@ Before running GridGain benchmarks, run `mvn package` command. This command will
 
 The following GridGain benchmark properties can be defined in the benchmark configuration:
 
-* 
 * `-nn <num>` or `--nodeNumber <num>` - Number of nodes (automatically set in `benchmark.properties`), used to wait for the specified number of nodes to start
 * `-b <num>` or `--backups <num>` - Number of backups for every key
 * `-ggcfg <path>` or `--ggConfig <path>` - Path to GridGain configuration file
