@@ -1,62 +1,53 @@
-## Yardstick GridGain
-Yardstick GridGain is the set of GridGain benchmarks written by using Yardstick framework.
-For more information about Yardstick framework, how to run it, build graphs and etc.
-go to its own [repository](https://github.com/gridgain/yardstick).
-For more information about GridGain In-Memory Data Grid visit [www.gridgain.org](http://www.gridgain.org).
+# Yardstick GridGain
+Yardstick GridGain is a set of GridGain Data Grid benchmarks written on top of Yardstick framework. For more information about Yardstick framework, how to run it and build graphs visit [Yardstick Repository](https://github.com/gridgain/yardstick).
+For more information about GridGain In-Memory Platform visit [www.gridgain.org/platform](http://www.gridgain.org/platform).
 
-## How to write your own GridGain benchmark
-All benchmarks extend `GridGainAbstractBenchmark` class. A new benchmark should also extend this
-abstract class and implement `test` method. This is the method that is actually benchmarked.
+## Installation
+1. Create a local clone of Yardstick GridGain repository
+2. Import Yardstick GridGain POM file into your project
+3. Run `mvn package` command.
 
-## How to run GridGain benchmarks
-Before the run the project should be compiled and the jar file is built. This is done by command `mvn package`.
-Also this command unpacks benchmark scripts from `yardstick-resources.zip` file to `bin` directory.
-The procedure of benchmarks run is the same as described in Yardstick
-[documentation](https://github.com/gridgain/yardstick).
+## Writing GridGain Benchmarks
+All benchmarks extend `GridGainAbstractBenchmark` class. A new benchmark should also extend this abstract class and implement `test` method. This is the method that is actually benchmarked.
 
-### Properties and command line arguments
+## Running GridGain Benchmarks
+Before running GridGain benchmarks, run `mvn package` command. This command will compile the project and also will unpack scripts from `yardstick-resources.zip` file to `bin` directory.
+
+### Properties And Command Line Arguments
+> Note that this section only describes configuration parameters specific to GridGain benchmarks, and not for Yardstick framework. To run GridGain benchmarks and generate graphs, you will need to run them using Yardstick framework scripts in `bin` folder.
+
+> Refer to [Yardstick Documentation](https://github.com/gridgain/yardstick) for common Yardstick properties and command line arguments for running Yardstick scripts.
 
 The following GridGain benchmark properties can be defined in the benchmark configuration:
 
-* `-nn <num>` or `--nodeNumber <num>` - number of nodes (automatically set in `benchmark.properties`), 
-used to wait for the specified number of nodes to start
-* `-b <num>` or `--backups <num>` - number of backups
-* `-ggcfg <path>` or `--ggConfig <path>` - GridGain configuration file
-* `-sm <mode>` or `-syncMode <mode>` - GridGain synchronization mode
-* `-dm <mode>` or `--distroMode <mode>` - GridGain distribution mode
-* `-wom <mode>` or `--writeOrderMode <mode>` - GridGain write order mode
-* `-txc <value>` or `--txConcurrency <value>` - GridGain transaction concurrency control
-* `-txi <value>` or `--txIsolation <value>` - GridGain transaction isolation
-* `-ot` or `--offheapTiered` - flag indicating whether offheap mode is on
-* `-ov` or `--offheapValuesOnly` - flag indicating whether offheap mode is on and only cache values are stored offheap
-* `-rtp <num>`  or `--restPort <num>` - REST TCP port, 
-if this property is defined it indicates that a GridGain node is ready to process GridGain Clients
+* 
+* `-nn <num>` or `--nodeNumber <num>` - Number of nodes (automatically set in `benchmark.properties`), used to wait for the specified number of nodes to start
+* `-b <num>` or `--backups <num>` - Number of backups for every key
+* `-ggcfg <path>` or `--ggConfig <path>` - Path to GridGain configuration file
+* `-sm <mode>` or `-syncMode <mode>` - GridGain synchronization mode (defined in `GridCacheWriteSynchronizationMode`)
+* `-dm <mode>` or `--distroMode <mode>` - GridGain distribution mode (defined in `GridCacheDistributionMode`)
+* `-wom <mode>` or `--writeOrderMode <mode>` - GridGain write order mode for ATOMIC caches (defined in `GridCacheAtomicWriteOrderMode`)
+* `-txc <value>` or `--txConcurrency <value>` - GridGain cache transaction concurrency control, either `OPTIMISTIC` or `PESSIMISTIC` (defined in `GridCacheTxConcurrency`)
+* `-txi <value>` or `--txIsolation <value>` - GridGain cache transaction isolation (defined in `GridCacheTxIsolation`)
+* `-ot` or `--offheapTiered` - Flag indicating whether tiered off-heap mode is on
+* `-ov` or `--offheapValuesOnly` - Flag indicating whether off-heap mode is on and only cache values are stored off-heap
+* `-rtp <num>`  or `--restPort <num>` - REST TCP port, indicates that a GridGain node is ready to process GridGain Clients
 * `-rth <host>` or `--restHost <host>` - REST TCP host
-* `-ss` or `--syncSend` - flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
-* `-r <num>` or `--range` - range of keys that are randomly generated for cache operations
+* `-ss` or `--syncSend` - Flag indicating whether synchronous send is used in `GridTcpCommunicationSpi`
+* `-r <num>` or `--range` - Range of keys that are randomly generated for cache operations
 
-For example if we need to run GridGainNode server on localhost and GridGainPutBenchmark benchmark on localhost, 
-number of backups is 1, synchronization mode is PRIMARY_SYNC 
-then the following configuration should be specified in run properties file:
+For example if we need to run 2 `GridGainNode` servers on localhost with `GridGainPutBenchmark` benchmark on localhost, with number of backups set to 1, synchronization mode set to `PRIMARY_SYNC`, then the following configuration should be specified in `benchmark.properties` file:
 
-* `HOSTS=localhost` 
-* `CONFIGS="-b 1 -sm PRIMARY_SYNC -dn GridGainPutBenchmark -sn GridGainNode"`
-
-## Maven Install
-The easiest way to get started with Yardstick GridGain in your project is to use Maven dependency management:
-
-```xml
-<dependency>
-    <groupId>org.yardstick.gridgain</groupId>
-    <artifactId>yardstick-gridgain</artifactId>
-    <version>${yardstick-gridgain.version}</version>
-</dependency>
 ```
-
-You can copy and paste this snippet into your Maven POM file. Make sure to replace version with the one you need.
+HOSTS=localhost,localhost
+    
+# Note that -dn and -sn, which stand for data node and server node, are 
+# native Yardstick parameters and are documented in Yardstick framework.
+CONFIGS="-b 1 -sm PRIMARY_SYNC -dn GridGainPutBenchmark -sn GridGainNode"
+```
 
 ## Issues
 Use GitHub [issues](https://github.com/gridgain/yardstick-gridgain/issues) to file bugs.
 
 ## License
-Yardstick GridGain is available under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license.
+Yardstick GridGain is available under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) Open Source license.
