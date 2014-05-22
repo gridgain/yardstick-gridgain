@@ -12,14 +12,14 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 /**
- * GridGain benchmark that performs put operations.
+ * GridGain benchmark that performs put and get operations.
  */
-public class GridGainPutBenchmark extends GridGainAbstractBenchmark {
+public class GridGainPutGetBenchmark extends GridGainAbstractBenchmark {
     /** */
-    public GridGainPutBenchmark() {
+    public GridGainPutGetBenchmark() {
         // Use cache "atomic" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("atomic");
@@ -28,6 +28,11 @@ public class GridGainPutBenchmark extends GridGainAbstractBenchmark {
     /** {@inheritDoc} */
     @Override public void test() throws Exception {
         int key = nextRandom(args.range());
+
+        Object val = cache.get(key);
+
+        if (val != null)
+            key = nextRandom(args.range());
 
         cache.putx(key, new SampleValue(key));
     }

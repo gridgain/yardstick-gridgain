@@ -12,25 +12,26 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.query.*;
+import org.gridgain.grid.dataload.*;
 import org.gridgain.grid.lang.*;
 import org.gridgain.grid.util.typedef.*;
-import org.yardstick.*;
-import org.yardstick.gridgain.querymodel.*;
+import org.yardstickframework.*;
+import org.yardstickframework.gridgain.querymodel.*;
 
 import java.util.*;
 
 /**
- * GridGain benchmark that performs put and query operations.
+ * GridGain benchmark that performs query operations.
  */
-public class GridGainQueryPutBenchmark extends GridGainAbstractBenchmark {
+public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
     /** */
-    public GridGainQueryPutBenchmark() {
+    public GridGainQueryBenchmark() {
         // Use cache "query" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("query");
@@ -40,6 +41,21 @@ public class GridGainQueryPutBenchmark extends GridGainAbstractBenchmark {
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
 
+        cfg.output().println("Populating query data...");
+
+        long start = System.nanoTime();
+
+        try (GridDataLoader<Integer, Person> dataLdr = grid().dataLoader(cache.name())) {
+            for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
+                dataLdr.addData(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
+
+                if (i % 100000 == 0)
+                    cfg.output().println("Populated persons: " + i);
+            }
+        }
+
+        cfg.output().println("Finished populating query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
+
         qry = cache.queries().createSqlQuery(Person.class, "salary >= ? and salary <= ?");
     }
 
@@ -47,20 +63,14 @@ public class GridGainQueryPutBenchmark extends GridGainAbstractBenchmark {
     @Override public void test() throws Exception {
         double salary = RAND.nextDouble() * args.range() * 1000;
 
-        if (RAND.nextBoolean()) {
-            double maxSalary = salary + 1000;
+        double maxSalary = salary + 1000;
 
-            Collection<Person> persons = executeQuery(salary, maxSalary);
+        Collection<Person> persons = executeQuery(salary, maxSalary);
 
-            for (Person p : persons)
-                if (p.getSalary() < salary || p.getSalary() > maxSalary)
-                    throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                        ", person=" + p + ']');
-        }
-        else {
-            int i = RAND.nextInt(args.range());
-
-            cache.putx(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
+        for (Person p : persons) {
+            if (p.getSalary() < salary || p.getSalary() > maxSalary)
+                throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
+                    ", person=" + p + ']');
         }
     }
 
@@ -71,8 +81,7 @@ public class GridGainQueryPutBenchmark extends GridGainAbstractBenchmark {
      * @throws Exception If failed.
      */
     private Collection<Person> executeQuery(double minSalary, double maxSalary) throws Exception {
-        GridCacheQuery<Map.Entry<Integer, Person>> q =
-            (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
+        GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
         Collection<Map.Entry<Integer, Person>> res = q.execute(minSalary, maxSalary).get();
 

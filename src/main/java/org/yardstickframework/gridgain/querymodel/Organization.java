@@ -12,7 +12,7 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain.querymodel;
+package org.yardstickframework.gridgain.querymodel;
 
 import org.gridgain.grid.cache.query.*;
 

@@ -12,7 +12,7 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 /**
  * GridGain benchmark that performs transactional put operations.

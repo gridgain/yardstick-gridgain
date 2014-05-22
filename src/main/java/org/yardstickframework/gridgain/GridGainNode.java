@@ -12,13 +12,13 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.*;
 import org.gridgain.grid.cache.*;
 import org.gridgain.grid.cache.eviction.lru.*;
 import org.gridgain.grid.spi.communication.tcp.*;
-import org.yardstick.*;
+import org.yardstickframework.*;
 
 import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
 import static org.gridgain.grid.cache.GridCacheMemoryMode.*;

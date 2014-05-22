@@ -12,14 +12,14 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.query.*;
 import org.gridgain.grid.dataload.*;
 import org.gridgain.grid.lang.*;
 import org.gridgain.grid.util.typedef.*;
-import org.yardstick.*;
-import org.yardstick.gridgain.querymodel.*;
+import org.yardstickframework.*;
+import org.yardstickframework.gridgain.querymodel.*;
 
 import java.util.*;
 

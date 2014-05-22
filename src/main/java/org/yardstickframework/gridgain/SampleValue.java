@@ -12,7 +12,7 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
 
 import java.io.*;
 

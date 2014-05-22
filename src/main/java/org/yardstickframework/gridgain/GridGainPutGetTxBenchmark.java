@@ -12,28 +12,34 @@
  limitations under the License.
  */
 
-package org.yardstick.gridgain;
+package org.yardstickframework.gridgain;
+
+import org.gridgain.grid.cache.*;
 
 /**
- * GridGain benchmark that performs put and get operations.
+ * GridGain benchmark that performs transactional put and get operations.
  */
-public class GridGainPutGetBenchmark extends GridGainAbstractBenchmark {
+public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
     /** */
-    public GridGainPutGetBenchmark() {
-        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
+    public GridGainPutGetTxBenchmark() {
+        // Use cache "tx" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
-        super("atomic");
+        super("tx");
     }
 
     /** {@inheritDoc} */
     @Override public void test() throws Exception {
-        int key = nextRandom(args.range());
+        int key = nextRandom(0, args.range() / 2);
 
-        Object val = cache.get(key);
+        try (GridCacheTx tx = cache.txStart()) {
+            Object val = cache.get(key);
 
-        if (val != null)
-            key = nextRandom(args.range());
+            if (val != null)
+                key = nextRandom(args.range() / 2, args.range());
 
-        cache.putx(key, new SampleValue(key));
+            cache.putx(key, new SampleValue(key));
+
+            tx.commit();
+        }
     }
 }
