@@ -46,19 +46,11 @@
         </developer>
     </developers>
 
-    <repositories>
-        <repository>
-            <!-- Staging repository, will be removed after Yardstick is released. -->
-            <id>test-yardstick-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/orgyardstickframework-1000</url>
-        </repository>
-    </repositories>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <yardstick.version>LATEST</yardstick.version>
+        <yardstick.version>RELEASE</yardstick.version>
         <gridgain.version>RELEASE</gridgain.version>
     </properties>
 
