@@ -26,12 +26,12 @@ import java.util.*;
 /**
  * GridGain benchmark that performs query operations.
  */
-public class GridGainQueryBenchmark extends GridGainAbstractBenchmark {
+public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
     /** */
-    public GridGainQueryBenchmark() {
+    public GridGainSqlQueryBenchmark() {
         // Use cache "query" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("query");
