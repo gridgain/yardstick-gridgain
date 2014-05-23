@@ -1,12 +1,15 @@
 # Yardstick GridGain
-Yardstick GridGain is a set of GridGain Data Grid benchmarks written on top of Yardstick framework. For more information about Yardstick framework, how to run it and build graphs visit [Yardstick Repository](https://github.com/gridgain/yardstick).
-For more information about GridGain In-Memory Platform visit [www.gridgain.org/platform](http://www.gridgain.org/platform).
+Yardstick GridGain is a set of <a href="http://www.gridgain.org/platform" target="_blank">GridGain Data Grid</a> benchmarks written on top of Yardstick framework.
+
+## Yardstick Framework
+Visit [Yardstick Repository](https://github.com/gridgain/yardstick) for detailed information on how to run Yardstick benchmarks and how to generate graphs.
+
+The documentation below describes configuration parameters in addition to standard Yardstick parameters.
 
 ## Screenshots
 ![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound.png)
 ### Click on individual graphs to Zoom In
 ![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound-magnified.png)
-
 
 ## Installation
 1. Create a local clone of Yardstick GridGain repository
