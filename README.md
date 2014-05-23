@@ -19,13 +19,13 @@ The documentation below describes configuration parameters in addition to standa
 ## Provided Benchmarks
 The following benchmarks are provided:
 
-1. GridGainPutBenchmark - benchmarks atomic distributed cache put operation
-2. GridGainPutGetBenchmark - benchmarks atomic distributed cache put and get operations together
-3. GridGainPutTxBenchmark - benchmarks transactional distributed cache put operation
-4. GridGainPutGetTxBenchmark - benchmarks transactional distributed cache put and get operations together
-5. GridGainSqlQueryBenchmark - benchmarks distributed SQL query over cached data
-6. GridGainSqlQueryJoinBenchmark - benchmarks distributed SQL query with a Join over cached data
-7. GridGainSqlQueryPutBenchmark - benchmarks distributed SQL query with simultaneous cache updates
+1. `GridGainPutBenchmark` - benchmarks atomic distributed cache put operation
+2. `GridGainPutGetBenchmark` - benchmarks atomic distributed cache put and get operations together
+3. `GridGainPutTxBenchmark` - benchmarks transactional distributed cache put operation
+4. `GridGainPutGetTxBenchmark` - benchmarks transactional distributed cache put and get operations together
+5. `GridGainSqlQueryBenchmark` - benchmarks distributed SQL query over cached data
+6. `GridGainSqlQueryJoinBenchmark` - benchmarks distributed SQL query with a Join over cached data
+7. `GridGainSqlQueryPutBenchmark` - benchmarks distributed SQL query with simultaneous cache updates
 
 ## Writing GridGain Benchmarks
 All benchmarks extend `GridGainAbstractBenchmark` class. A new benchmark should also extend this abstract class and implement `test` method. This is the method that is actually benchmarked.
