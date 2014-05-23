@@ -16,13 +16,15 @@ The documentation below describes configuration parameters in addition to standa
 2. Import Yardstick GridGain POM file into your project
 3. Run `mvn package` command
 
-## Available Benchmarks
-1. **Put**
-2. **Put And Get**
-3. **Transactional Put**
-4. **Transactional Put And Get**
-5. **SQL Query**
-6. **SQL Query With Put**
+## Provided Benchmarks
+The following benchmarks are provided:
+
+1. Put
+2. Put And Get
+3. Transactional Put
+4. Transactional Put And Get
+5. SQL Query
+6. SQL Query With Put
 
 ## Writing GridGain Benchmarks
 All benchmarks extend `GridGainAbstractBenchmark` class. A new benchmark should also extend this abstract class and implement `test` method. This is the method that is actually benchmarked.
