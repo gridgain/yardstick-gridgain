@@ -76,7 +76,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
 
     /** {@inheritDoc} */
     @Override public String description() {
-        return args.parametersToString() + '_' + super.description();
+        return args.parametersToString() + '-' + super.description();
     }
 
     /** {@inheritDoc} */
