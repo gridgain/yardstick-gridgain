@@ -21,7 +21,7 @@
     <groupId>org.yardstickframework.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>0.6.0</version>
+    <version>0.6.1</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>

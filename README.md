@@ -7,9 +7,9 @@ Visit <a href="https://github.com/gridgain/yardstick" target="_blank">Yardstick 
 The documentation below describes configuration parameters in addition to standard Yardstick parameters.
 
 ## Screenshots
-![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound.png)
+![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound1.png)
 ### Click on individual graphs to Zoom In
-![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound-magnified.png)
+![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound-magnified1.png)
 
 ## Installation
 1. Create a local clone of Yardstick GridGain repository
