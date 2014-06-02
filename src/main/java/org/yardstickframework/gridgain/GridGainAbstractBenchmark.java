@@ -20,7 +20,6 @@ import org.gridgain.grid.events.*;
 import org.gridgain.grid.lang.*;
 import org.yardstickframework.*;
 
-import java.util.*;
 import java.util.concurrent.*;
 
 import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
@@ -30,9 +29,6 @@ import static org.gridgain.grid.events.GridEventType.*;
  * Abstract class for GridGain benchmarks.
  */
 public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
-    /** Random number generator. */
-    protected static final Random RAND = new Random();
-
     /** Cache name. */
     private final String cacheName;
 
@@ -125,7 +121,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
      * @return Next key.
      */
     protected int nextRandom(int max) {
-        return RAND.nextInt(max);
+        return ThreadLocalRandom.current().nextInt(max);
     }
 
     /**
@@ -134,6 +130,6 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
      * @return Next key.
      */
     protected int nextRandom(int min, int max) {
-        return RAND.nextInt(max - min) + min;
+        return ThreadLocalRandom.current().nextInt(max - min) + min;
     }
 }

@@ -21,6 +21,7 @@ import org.yardstickframework.*;
 import org.yardstickframework.gridgain.querymodel.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * GridGain benchmark that performs put and query operations.
@@ -45,9 +46,11 @@ public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
 
     /** {@inheritDoc} */
     @Override public void test() throws Exception {
-        double salary = RAND.nextDouble() * args.range() * 1000;
+        ThreadLocalRandom rnd = ThreadLocalRandom.current();
 
-        if (RAND.nextBoolean()) {
+        double salary = rnd.nextDouble() * args.range() * 1000;
+
+        if (rnd.nextBoolean()) {
             double maxSalary = salary + 1000;
 
             Collection<Person> persons = executeQuery(salary, maxSalary);
@@ -58,7 +61,7 @@ public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
                         ", person=" + p + ']');
         }
         else {
-            int i = RAND.nextInt(args.range());
+            int i = rnd.nextInt(args.range());
 
             cache.putx(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
         }

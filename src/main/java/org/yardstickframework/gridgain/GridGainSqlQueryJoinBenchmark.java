@@ -22,6 +22,7 @@ import org.yardstickframework.*;
 import org.yardstickframework.gridgain.querymodel.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * GridGain benchmark that performs query operations with joins.
@@ -57,7 +58,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
             // Populate persons.
             for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
                 Person p =
-                    new Person(i, RAND.nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
+                    new Person(i, ThreadLocalRandom.current().nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
 
                 dataLdr.addData(i, p);
 
@@ -76,7 +77,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
     /** {@inheritDoc} */
     @Override public void test() throws Exception {
-        double salary = RAND.nextDouble() * args.range() * 1000;
+        double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
 
         double maxSalary = salary + 1000;
 

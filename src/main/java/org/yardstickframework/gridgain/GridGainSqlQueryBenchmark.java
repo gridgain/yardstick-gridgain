@@ -22,6 +22,7 @@ import org.yardstickframework.*;
 import org.yardstickframework.gridgain.querymodel.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * GridGain benchmark that performs query operations.
@@ -61,7 +62,7 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
 
     /** {@inheritDoc} */
     @Override public void test() throws Exception {
-        double salary = RAND.nextDouble() * args.range() * 1000;
+        double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
 
         double maxSalary = salary + 1000;
 
