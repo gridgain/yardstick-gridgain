@@ -21,7 +21,7 @@
     <groupId>org.yardstickframework.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>0.6.2</version>
+    <version>0.6.3</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
@@ -147,7 +147,7 @@
                         <fileset>
                             <directory>${basedir}/libs</directory>
                             <includes>
-                                <include>**/yardstick*.jar</include>
+                                <include>**/*.jar</include>
                             </includes>
                         </fileset>
                     </filesets>
