@@ -48,17 +48,20 @@ public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
     @Override public void test() throws Exception {
         ThreadLocalRandom rnd = ThreadLocalRandom.current();
 
-        double salary = rnd.nextDouble() * args.range() * 1000;
-
         if (rnd.nextBoolean()) {
+            double salary = rnd.nextDouble() * args.range() * 1000;
+
             double maxSalary = salary + 1000;
 
-            Collection<Person> persons = executeQuery(salary, maxSalary);
+            Collection<Map.Entry<Integer, Person>> entries = executeQuery(salary, maxSalary);
 
-            for (Person p : persons)
+            for (Map.Entry<Integer, Person> entry : entries) {
+                Person p = entry.getValue();
+
                 if (p.getSalary() < salary || p.getSalary() > maxSalary)
                     throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                        ", person=" + p + ']');
+                            ", person=" + p + ']');
+            }
         }
         else {
             int i = rnd.nextInt(args.range());
@@ -73,18 +76,9 @@ public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
      * @return Query result.
      * @throws Exception If failed.
      */
-    private Collection<Person> executeQuery(double minSalary, double maxSalary) throws Exception {
-        GridCacheQuery<Map.Entry<Integer, Person>> q =
-            (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
+    private Collection<Map.Entry<Integer, Person>> executeQuery(double minSalary, double maxSalary) throws Exception {
+        GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
-        Collection<Map.Entry<Integer, Person>> res = q.execute(minSalary, maxSalary).get();
-
-        return F.viewReadOnly(res,
-            new GridClosure<Map.Entry<Integer, Person>, Person>() {
-                @Override public Person apply(Map.Entry<Integer, Person> e) {
-                    return e.getValue();
-                }
-            }
-        );
+        return q.execute(minSalary, maxSalary).get();
     }
 }

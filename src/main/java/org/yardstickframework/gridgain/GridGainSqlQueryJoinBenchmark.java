@@ -81,12 +81,21 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
         double maxSalary = salary + 1000;
 
-        Collection<Person> persons = executeQueryJoin(salary, maxSalary);
+        Collection<List<?>> lists = executeQueryJoin(salary, maxSalary);
 
-        for (Person p : persons)
+        for (List<?> l : lists) {
+            Person p = new Person();
+
+            p.setId((Integer)l.get(0));
+            p.setOrganizationId((Integer)l.get(1));
+            p.setFirstName((String)l.get(2));
+            p.setLastName((String)l.get(3));
+            p.setSalary((Double)l.get(4));
+
             if (p.getSalary() < salary || p.getSalary() > maxSalary)
                 throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                    ", person=" + p + ']');
+                        ", person=" + p + ']');
+        }
     }
 
     /**
@@ -95,25 +104,9 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
      * @return Query results.
      * @throws Exception If failed.
      */
-    private Collection<Person> executeQueryJoin(double minSalary, double maxSalary) throws Exception {
+    private Collection<List<?>> executeQueryJoin(double minSalary, double maxSalary) throws Exception {
         GridCacheQuery<List<?>> q = (GridCacheQuery<List<?>>)qry;
 
-        Collection<List<?>> res = q.execute(minSalary, maxSalary).get();
-
-        return F.viewReadOnly(res,
-            new GridClosure<List<?>, Person>() {
-                @Override public Person apply(List<?> l) {
-                    Person p = new Person();
-
-                    p.setId((Integer)l.get(0));
-                    p.setOrganizationId((Integer)l.get(1));
-                    p.setFirstName((String)l.get(2));
-                    p.setLastName((String)l.get(3));
-                    p.setSalary((Double)l.get(4));
-
-                    return p;
-                }
-            }
-        );
+        return q.execute(minSalary, maxSalary).get();
     }
 }

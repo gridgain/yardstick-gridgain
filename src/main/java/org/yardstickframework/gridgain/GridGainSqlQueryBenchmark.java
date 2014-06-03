@@ -66,12 +66,14 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
 
         double maxSalary = salary + 1000;
 
-        Collection<Person> persons = executeQuery(salary, maxSalary);
+        Collection<Map.Entry<Integer, Person>> entries = executeQuery(salary, maxSalary);
 
-        for (Person p : persons) {
+        for (Map.Entry<Integer, Person> entry : entries) {
+            Person p = entry.getValue();
+
             if (p.getSalary() < salary || p.getSalary() > maxSalary)
                 throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                    ", person=" + p + ']');
+                        ", person=" + p + ']');
         }
     }
 
@@ -81,17 +83,9 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
      * @return Query result.
      * @throws Exception If failed.
      */
-    private Collection<Person> executeQuery(double minSalary, double maxSalary) throws Exception {
+    private Collection<Map.Entry<Integer, Person>> executeQuery(double minSalary, double maxSalary) throws Exception {
         GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
-        Collection<Map.Entry<Integer, Person>> res = q.execute(minSalary, maxSalary).get();
-
-        return F.viewReadOnly(res,
-            new GridClosure<Map.Entry<Integer, Person>, Person>() {
-                @Override public Person apply(Map.Entry<Integer, Person> e) {
-                    return e.getValue();
-                }
-            }
-        );
+        return q.execute(minSalary, maxSalary).get();
     }
 }
