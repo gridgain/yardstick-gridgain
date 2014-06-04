@@ -16,8 +16,6 @@ package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.query.*;
 import org.gridgain.grid.dataload.*;
-import org.gridgain.grid.lang.*;
-import org.gridgain.grid.util.typedef.*;
 import org.yardstickframework.*;
 import org.yardstickframework.gridgain.querymodel.*;
 
@@ -84,17 +82,20 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
         Collection<List<?>> lists = executeQueryJoin(salary, maxSalary);
 
         for (List<?> l : lists) {
-            Person p = new Person();
+            double sal = (Double)l.get(4);
 
-            p.setId((Integer)l.get(0));
-            p.setOrganizationId((Integer)l.get(1));
-            p.setFirstName((String)l.get(2));
-            p.setLastName((String)l.get(3));
-            p.setSalary((Double)l.get(4));
+            if (sal < salary || sal > maxSalary) {
+                Person p = new Person();
 
-            if (p.getSalary() < salary || p.getSalary() > maxSalary)
+                p.setId((Integer)l.get(0));
+                p.setOrganizationId((Integer)l.get(1));
+                p.setFirstName((String)l.get(2));
+                p.setLastName((String)l.get(3));
+                p.setSalary(sal);
+
                 throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                        ", person=" + p + ']');
+                    ", person=" + p + ']');
+            }
         }
     }
 

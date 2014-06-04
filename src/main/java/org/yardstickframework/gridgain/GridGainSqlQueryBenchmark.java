@@ -16,8 +16,6 @@ package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.query.*;
 import org.gridgain.grid.dataload.*;
-import org.gridgain.grid.lang.*;
-import org.gridgain.grid.util.typedef.*;
 import org.yardstickframework.*;
 import org.yardstickframework.gridgain.querymodel.*;
 
