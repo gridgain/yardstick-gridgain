@@ -22,6 +22,8 @@ import org.yardstickframework.gridgain.querymodel.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import static org.yardstickframework.BenchmarkUtils.*;
+
 /**
  * GridGain benchmark that performs query operations with joins.
  */
@@ -40,7 +42,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
 
-        cfg.output().println("Populating query data...");
+        println(cfg, "Populating query data...");
 
         long start = System.nanoTime();
 
@@ -61,11 +63,11 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
                 dataLdr.addData(i, p);
 
                 if (i % 100000 == 0)
-                    cfg.output().println("Populated persons: " + i);
+                    println(cfg, "Populated persons: " + i);
             }
         }
 
-        cfg.output().println("Finished populating join query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
+        println(cfg, "Finished populating join query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
 
         qry = cache.queries().createSqlFieldsQuery(
             "select p.id, p.orgId, p.firstName, p.lastName, p.salary, o.name " +

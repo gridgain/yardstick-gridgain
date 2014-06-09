@@ -24,6 +24,7 @@ import java.util.concurrent.*;
 
 import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
 import static org.gridgain.grid.events.GridEventType.*;
+import static org.yardstickframework.BenchmarkUtils.*;
 
 /**
  * Abstract class for GridGain benchmarks.
@@ -52,7 +53,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
 
-        BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
+        jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
 
         node = new GridGainNode(args.distributionMode() == CLIENT_ONLY);
 
@@ -103,7 +104,7 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
         }, EVT_NODE_JOINED);
 
         if (!nodesStarted()) {
-            cfg.output().println("Waiting for " + (args.nodes() - 1) + " nodes to start...");
+            println(cfg, "Waiting for " + (args.nodes() - 1) + " nodes to start...");
 
             nodesStartedLatch.await();
         }
