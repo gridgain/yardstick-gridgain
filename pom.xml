@@ -21,7 +21,7 @@
     <groupId>org.yardstickframework.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>0.6.4</version>
+    <version>0.6.5</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
@@ -82,6 +82,13 @@
         <dependency>
             <groupId>org.gridgain</groupId>
             <artifactId>gridgain-platform</artifactId>
+            <version>${gridgain.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gridgain</groupId>
+            <artifactId>gridgain-log4j</artifactId>
             <version>${gridgain.version}</version>
         </dependency>
 

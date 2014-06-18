@@ -184,9 +184,9 @@ public class GridGainBenchmarkArguments {
     }
 
     /**
-     * @return Short string.
+     * @return Description.
      */
-    public String parametersToString() {
+    public String description() {
         return "-nn=" + nodes + "-b=" + backups + "-sm=" + syncMode + "-dm=" + distroMode +
             (orderMode == null ? "" : "-wom=" + orderMode) + "-txc=" + txConcurrency;
     }

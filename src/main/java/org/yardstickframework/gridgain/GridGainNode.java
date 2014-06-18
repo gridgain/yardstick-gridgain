@@ -17,6 +17,7 @@ package org.yardstickframework.gridgain;
 import org.gridgain.grid.*;
 import org.gridgain.grid.cache.*;
 import org.gridgain.grid.cache.eviction.lru.*;
+import org.gridgain.grid.kernal.*;
 import org.gridgain.grid.spi.communication.tcp.*;
 import org.yardstickframework.*;
 
@@ -49,7 +50,7 @@ public class GridGainNode implements BenchmarkServer {
 
         BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-node>");
 
-        GridConfiguration c = GridGain.loadConfiguration(args.configuration()).get1();
+        GridConfiguration c = GridGainEx.loadConfiguration(args.configuration()).get1();
 
         assert c != null;
 
