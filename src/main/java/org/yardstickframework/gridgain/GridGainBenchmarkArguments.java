@@ -16,7 +16,7 @@ package org.yardstickframework.gridgain;
 
 import com.beust.jcommander.*;
 import org.gridgain.grid.cache.*;
-import org.gridgain.grid.util.typedef.internal.*;
+import org.gridgain.grid.util.tostring.*;
 
 /**
  * Input arguments for GridGain benchmarks.
@@ -193,6 +193,6 @@ public class GridGainBenchmarkArguments {
 
     /** {@inheritDoc} */
     @Override public String toString() {
-        return S.toString(GridGainBenchmarkArguments.class, this);
+        return GridToStringBuilder.toString(GridGainBenchmarkArguments.class, this);
     }
 }
