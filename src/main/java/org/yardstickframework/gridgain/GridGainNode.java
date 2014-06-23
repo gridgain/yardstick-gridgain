@@ -17,9 +17,16 @@ package org.yardstickframework.gridgain;
 import org.gridgain.grid.*;
 import org.gridgain.grid.cache.*;
 import org.gridgain.grid.cache.eviction.lru.*;
-import org.gridgain.grid.kernal.*;
 import org.gridgain.grid.spi.communication.tcp.*;
+import org.gridgain.grid.util.*;
+import org.springframework.beans.*;
+import org.springframework.beans.factory.xml.*;
+import org.springframework.context.support.*;
+import org.springframework.core.io.*;
 import org.yardstickframework.*;
+
+import java.net.*;
+import java.util.*;
 
 import static org.gridgain.grid.cache.GridCacheDistributionMode.*;
 import static org.gridgain.grid.cache.GridCacheMemoryMode.*;
@@ -50,7 +57,7 @@ public class GridGainNode implements BenchmarkServer {
 
         BenchmarkUtils.jcommander(cfg.commandLineArguments(), args, "<gridgain-node>");
 
-        GridConfiguration c = GridGainEx.loadConfiguration(args.configuration()).get1();
+        GridConfiguration c = loadConfiguration(args.configuration());
 
         assert c != null;
 
@@ -101,6 +108,56 @@ public class GridGainNode implements BenchmarkServer {
         c.setCommunicationSpi(commSpi);
 
         grid = GridGain.start(c);
+    }
+
+    /**
+     * @param springCfgPath Spring configuration file path.
+     * @return Grid configuration.
+     * @throws Exception If failed.
+     */
+    private static GridConfiguration loadConfiguration(String springCfgPath) throws Exception {
+        URL url;
+
+        try {
+            url = new URL(springCfgPath);
+        }
+        catch (MalformedURLException e) {
+            url = GridUtils.resolveGridGainUrl(springCfgPath);
+
+            if (url == null)
+                throw new GridException("Spring XML configuration path is invalid: " + springCfgPath +
+                    ". Note that this path should be either absolute or a relative local file system path, " +
+                    "relative to META-INF in classpath or valid URL to GRIDGAIN_HOME.", e);
+        }
+
+        GenericApplicationContext springCtx;
+
+        try {
+            springCtx = new GenericApplicationContext();
+
+            new XmlBeanDefinitionReader(springCtx).loadBeanDefinitions(new UrlResource(url));
+
+            springCtx.refresh();
+        }
+        catch (BeansException e) {
+            throw new Exception("Failed to instantiate Spring XML application context [springUrl=" +
+                url + ", err=" + e.getMessage() + ']', e);
+        }
+
+        Map<String, GridConfiguration> cfgMap;
+
+        try {
+            cfgMap = springCtx.getBeansOfType(GridConfiguration.class);
+        }
+        catch (BeansException e) {
+            throw new Exception("Failed to instantiate bean [type=" + GridConfiguration.class + ", err=" +
+                e.getMessage() + ']', e);
+        }
+
+        if (cfgMap == null || cfgMap.isEmpty())
+            throw new Exception("Failed to find grid configuration in: " + url);
+
+        return cfgMap.values().iterator().next();
     }
 
     /** {@inheritDoc} */
