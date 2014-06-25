@@ -16,6 +16,8 @@ package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.*;
 
+import java.util.*;
+
 /**
  * GridGain benchmark that performs transactional put and get operations.
  */
@@ -28,7 +30,7 @@ public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
     }
 
     /** {@inheritDoc} */
-    @Override public void test() throws Exception {
+    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(0, args.range() / 2);
 
         try (GridCacheTx tx = cache.txStart()) {
@@ -41,5 +43,7 @@ public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
 
             tx.commit();
         }
+
+        return true;
     }
 }

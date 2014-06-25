@@ -14,6 +14,8 @@
 
 package org.yardstickframework.gridgain;
 
+import java.util.*;
+
 /**
  * GridGain benchmark that performs transactional put operations.
  */
@@ -26,10 +28,12 @@ public class GridGainPutTxBenchmark extends GridGainAbstractBenchmark {
     }
 
     /** {@inheritDoc} */
-    @Override public void test() throws Exception {
+    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());
 
         // Implicit transaction is used.
         cache.putx(key, new SampleValue(key));
+
+        return true;
     }
 }

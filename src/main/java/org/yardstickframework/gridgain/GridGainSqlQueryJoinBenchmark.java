@@ -76,7 +76,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
     }
 
     /** {@inheritDoc} */
-    @Override public void test() throws Exception {
+    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
 
         double maxSalary = salary + 1000;
@@ -99,6 +99,8 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
                     ", person=" + p + ']');
             }
         }
+
+        return true;
     }
 
     /**
