@@ -21,7 +21,7 @@
     <groupId>org.yardstickframework.gridgain</groupId>
     <artifactId>yardstick-gridgain</artifactId>
     <name>Yardstick GridGain</name>
-    <version>0.6.6</version>
+    <version>0.6.7</version>
 
     <url>https://github.com/gridgain/yardstick-gridgain</url>
     <description>The set of GridGain benchmarks written by using Yardstick framework.</description>
@@ -54,18 +54,28 @@
         <gridgain.version>RELEASE</gridgain.version>
     </properties>
 
+    <!--
+        Uncomment this if Enterprise Edition is used.
+    -->
+    <!--
+    <repositories>
+        <repository>
+            <id>GridGain External Repository</id>
+            <url>http://www.gridgainsystems.com/nexus/content/repositories/external</url>
+        </repository>
+    </repositories>
+    -->
+
     <dependencies>
         <dependency>
             <groupId>org.gridgain</groupId>
             <artifactId>gridgain-platform</artifactId>
+            <!-- Replace the artifact above with the commented one if Enterprise Edition is used. -->
+            <!--
+            <artifactId>gridgain-platform-ent</artifactId>
+            -->
             <version>${gridgain.version}</version>
             <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.gridgain</groupId>
-            <artifactId>gridgain-log4j</artifactId>
-            <version>${gridgain.version}</version>
         </dependency>
 
         <dependency>
