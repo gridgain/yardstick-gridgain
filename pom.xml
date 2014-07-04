@@ -69,10 +69,10 @@
     <dependencies>
         <dependency>
             <groupId>org.gridgain</groupId>
-            <artifactId>gridgain-platform</artifactId>
+            <artifactId>gridgain-datagrid</artifactId>
             <!-- Replace the artifact above with the commented one if Enterprise Edition is used. -->
             <!--
-            <artifactId>gridgain-platform-ent</artifactId>
+            <artifactId>gridgain-datagrid-ent</artifactId>
             -->
             <version>${gridgain.version}</version>
             <type>pom</type>
