@@ -58,7 +58,7 @@ The following GridGain benchmark properties can be defined in the benchmark conf
 For example if we need to run 2 `GridGainNode` servers on localhost with `GridGainPutBenchmark` benchmark on localhost, with number of backups set to 1, synchronization mode set to `PRIMARY_SYNC`, then the following configuration should be specified in `benchmark.properties` file:
 
 ```
-HOSTS=localhost,localhost
+SERVER_HOSTS=localhost,localhost
     
 # Note that -dn and -sn, which stand for data node and server node, are 
 # native Yardstick parameters and are documented in Yardstick framework.
