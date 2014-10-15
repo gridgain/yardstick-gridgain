@@ -14,6 +14,8 @@
 
 package org.yardstickframework.gridgain;
 
+import java.util.*;
+
 /**
  * GridGain benchmark that performs put operations.
  */
@@ -26,9 +28,11 @@ public class GridGainPutBenchmark extends GridGainAbstractBenchmark {
     }
 
     /** {@inheritDoc} */
-    @Override public void test() throws Exception {
+    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());
 
         cache.putx(key, new SampleValue(key));
+
+        return true;
     }
 }

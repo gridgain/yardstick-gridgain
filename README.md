@@ -1,5 +1,5 @@
 # Yardstick GridGain Benchmarks
-Yardstick GridGain is a set of <a href="http://www.gridgain.org/platform/data-grid" target="_blank">GridGain Data Grid</a> benchmarks written on top of Yardstick framework.
+Yardstick GridGain is a set of <a href="http://www.gridgain.com/platform/data-grid" target="_blank">GridGain Data Grid</a> benchmarks written on top of Yardstick framework.
 
 ## Yardstick Framework
 Visit <a href="https://github.com/gridgain/yardstick" target="_blank">Yardstick Repository</a> for detailed information on how to run Yardstick benchmarks and how to generate graphs.
@@ -7,9 +7,9 @@ Visit <a href="https://github.com/gridgain/yardstick" target="_blank">Yardstick 
 The documentation below describes configuration parameters in addition to standard Yardstick parameters.
 
 ## Screenshots
-![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound1.png)
+![Generated Graph](http://www.gridgain.com/images/yardstick/gridgain/yardstick-gg-compound1.png)
 ### Click on individual graphs to Zoom In
-![Generated Graph](http://www.gridgain.org/images/yardstick/gridgain/yardstick-gg-compound-magnified1.png)
+![Generated Graph](http://www.gridgain.com/images/yardstick/gridgain/yardstick-gg-compound-magnified1.png)
 
 ## Installation
 1. Create a local clone of Yardstick GridGain repository
@@ -19,13 +19,14 @@ The documentation below describes configuration parameters in addition to standa
 ## Provided Benchmarks
 The following benchmarks are provided:
 
-1. `GridGainPutBenchmark` - benchmarks atomic distributed cache put operation
-2. `GridGainPutGetBenchmark` - benchmarks atomic distributed cache put and get operations together
-3. `GridGainPutTxBenchmark` - benchmarks transactional distributed cache put operation
-4. `GridGainPutGetTxBenchmark` - benchmarks transactional distributed cache put and get operations together
-5. `GridGainSqlQueryBenchmark` - benchmarks distributed SQL query over cached data
-6. `GridGainSqlQueryJoinBenchmark` - benchmarks distributed SQL query with a Join over cached data
-7. `GridGainSqlQueryPutBenchmark` - benchmarks distributed SQL query with simultaneous cache updates
+1. `GridGainGetBenchmark` - benchmarks atomic distributed cache get operation
+2. `GridGainPutBenchmark` - benchmarks atomic distributed cache put operation
+3. `GridGainPutGetBenchmark` - benchmarks atomic distributed cache put and get operations together
+4. `GridGainPutTxBenchmark` - benchmarks transactional distributed cache put operation
+5. `GridGainPutGetTxBenchmark` - benchmarks transactional distributed cache put and get operations together
+6. `GridGainSqlQueryBenchmark` - benchmarks distributed SQL query over cached data
+7. `GridGainSqlQueryJoinBenchmark` - benchmarks distributed SQL query with a Join over cached data
+8. `GridGainSqlQueryPutBenchmark` - benchmarks distributed SQL query with simultaneous cache updates
 
 ## Writing GridGain Benchmarks
 All benchmarks extend `GridGainAbstractBenchmark` class. A new benchmark should also extend this abstract class and implement `test` method. This is the method that is actually benchmarked.
@@ -58,7 +59,7 @@ The following GridGain benchmark properties can be defined in the benchmark conf
 For example if we need to run 2 `GridGainNode` servers on localhost with `GridGainPutBenchmark` benchmark on localhost, with number of backups set to 1, synchronization mode set to `PRIMARY_SYNC`, then the following configuration should be specified in `benchmark.properties` file:
 
 ```
-HOSTS=localhost,localhost
+SERVER_HOSTS=localhost,localhost
     
 # Note that -dn and -sn, which stand for data node and server node, are 
 # native Yardstick parameters and are documented in Yardstick framework.

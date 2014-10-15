@@ -51,6 +51,12 @@ public class GridGainNode implements BenchmarkServer {
         this.clientMode = clientMode;
     }
 
+    /** */
+    public GridGainNode(boolean clientMode, Grid grid) {
+        this.clientMode = clientMode;
+        this.grid = grid;
+    }
+
     /** {@inheritDoc} */
     @Override public void start(BenchmarkConfiguration cfg) throws Exception {
         GridGainBenchmarkArguments args = new GridGainBenchmarkArguments();

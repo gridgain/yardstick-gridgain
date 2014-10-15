@@ -14,35 +14,24 @@
 
 package org.yardstickframework.gridgain;
 
-import org.gridgain.grid.cache.*;
-
 import java.util.*;
 
 /**
- * GridGain benchmark that performs transactional put and get operations.
+ * GridGain benchmark that performs get operations.
  */
-public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
+public class GridGainGetBenchmark extends GridGainAbstractBenchmark {
     /** */
-    public GridGainPutGetTxBenchmark() {
-        // Use cache "tx" for this benchmark. Configuration for the cache can be found
+    public GridGainGetBenchmark() {
+        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
-        super("tx");
+        super("atomic");
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(0, args.range() / 2);
+        int key = nextRandom(args.range());
 
-        try (GridCacheTx tx = cache.txStart()) {
-            Object val = cache.get(key);
-
-            if (val != null)
-                key = nextRandom(args.range() / 2, args.range());
-
-            cache.putx(key, new SampleValue(key));
-
-            tx.commit();
-        }
+        cache.get(key);
 
         return true;
     }

@@ -55,9 +55,14 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
 
         jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
 
-        node = new GridGainNode(args.distributionMode() == CLIENT_ONLY);
+        if (GridGain.state() != GridGainState.STARTED) {
+            node = new GridGainNode(args.distributionMode() == CLIENT_ONLY);
 
-        node.start(cfg);
+            node.start(cfg);
+        }
+        else
+            // Support for mixed benchmarks mode.
+            node = new GridGainNode(args.distributionMode() == CLIENT_ONLY, GridGain.grid());
 
         cache = node.grid().cache(cacheName);
 
@@ -68,13 +73,16 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
 
     /** {@inheritDoc} */
     @Override public void tearDown() throws Exception {
-        node.stop();
+        if (node != null)
+            node.stop();
     }
 
     /** {@inheritDoc} */
     @Override public String description() {
-        return cfg.description().isEmpty() ?
-            cfg.driverName() + args.description() + cfg.defaultDescription() : cfg.description();
+        String desc = BenchmarkUtils.description(cfg, this);
+
+        return desc.isEmpty() ?
+            getClass().getSimpleName() + args.description() + cfg.defaultDescription() : desc;
     }
 
     /** {@inheritDoc} */
