@@ -38,6 +38,11 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
         super("query");
     }
 
+    /** */
+    protected GridGainSqlQueryBenchmark(String cacheName) {
+        super(cacheName);
+    }
+
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);

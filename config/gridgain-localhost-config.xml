@@ -54,6 +54,34 @@
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="atomic-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="atomic-offheap-values"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
                     <property name="name" value="tx"/>
 
                     <property name="cacheMode" value="PARTITIONED"/>
@@ -63,6 +91,34 @@
                     <property name="swapEnabled" value="false"/>
 
                     <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="tx-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="tx-offheap-values"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -76,6 +132,36 @@
 
                     <!-- Enable query indexing for query cache. -->
                     <property name="queryIndexEnabled" value="true"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="query-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <!-- Enable query indexing for query cache. -->
+                    <property name="queryIndexEnabled" value="true"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="query-offheap-values"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <!-- Enable query indexing for query cache. -->
+                    <property name="queryIndexEnabled" value="true"/>
+
+                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
                 </bean>
             </list>
         </property>
