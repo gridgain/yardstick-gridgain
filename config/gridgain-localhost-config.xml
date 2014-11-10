@@ -34,6 +34,10 @@
                         <value>org.yardstickframework.gridgain.SampleValue</value>
                         <value>org.yardstickframework.gridgain.querymodel.Person</value>
                         <value>org.yardstickframework.gridgain.querymodel.Organization</value>
+                        <value>org.yardstickframework.gridgain.computemodel.SampleJob</value>
+                        <value>org.yardstickframework.gridgain.computemodel.SampleCallableJob</value>
+                        <value>org.yardstickframework.gridgain.computemodel.SampleRunnableJob</value>
+                        <value>org.yardstickframework.gridgain.computemodel.SampleClosure</value>
                     </list>
                 </property>
             </bean>
@@ -76,6 +80,18 @@
 
                     <!-- Enable query indexing for query cache. -->
                     <property name="queryIndexEnabled" value="true"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="compute"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
                 </bean>
             </list>
         </property>
