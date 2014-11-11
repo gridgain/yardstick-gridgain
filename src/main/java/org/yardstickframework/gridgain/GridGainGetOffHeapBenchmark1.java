@@ -22,9 +22,9 @@ import java.util.*;
  * GridGain benchmark that performs get operations with {@link GridCacheMemoryMode#OFFHEAP_TIERED OFFHEAP TIERED}
  * memory mode.
  */
-public class GridGainGetOffHeapBenchmark extends GridGainGetBenchmark {
+public class GridGainGetOffHeapBenchmark1 extends GridGainGetBenchmark {
     /** */
-    public GridGainGetOffHeapBenchmark() {
+    public GridGainGetOffHeapBenchmark1() {
         // Use cache "atomic-offheap" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("atomic-offheap");
