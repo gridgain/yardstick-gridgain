@@ -16,8 +16,6 @@ package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.cache.*;
 
-import java.util.*;
-
 /**
  * GridGain benchmark that performs transactional put operations
  * with {@link GridCacheMemoryMode#OFFHEAP_VALUES OFFHEAP VALUES} memory mode.

@@ -14,8 +14,11 @@
 
 package org.yardstickframework.gridgain;
 
+import org.gridgain.grid.cache.*;
+
 /**
- * GridGain benchmark that performs put and query operations.
+ * GridGain benchmark that performs put and query operations
+ * with {@link GridCacheMemoryMode#OFFHEAP_TIERED OFFHEAP TIERED} memory mode.
  */
 public class GridGainSqlQueryPutOffHeapBenchmark extends GridGainSqlQueryPutBenchmark {
     /** */
