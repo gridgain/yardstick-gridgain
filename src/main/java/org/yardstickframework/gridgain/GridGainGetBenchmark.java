@@ -20,14 +20,18 @@ import java.util.*;
  * GridGain benchmark that performs get operations.
  */
 public class GridGainGetBenchmark extends GridGainAbstractBenchmark {
-    /** */
+    /**
+     *
+     */
     public GridGainGetBenchmark() {
         // Use cache "atomic" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("atomic");
     }
 
-    /** */
+    /**
+     * @param cacheName
+     */
     protected GridGainGetBenchmark(String cacheName) {
         super(cacheName);
     }
