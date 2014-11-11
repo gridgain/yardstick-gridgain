@@ -14,17 +14,15 @@
 
 package org.yardstickframework.gridgain;
 
-import org.gridgain.grid.cache.query.GridCacheQuery;
-import org.gridgain.grid.dataload.GridDataLoader;
-import org.yardstickframework.BenchmarkConfiguration;
-import org.yardstickframework.gridgain.querymodel.Person;
+import org.gridgain.grid.cache.query.*;
+import org.gridgain.grid.dataload.*;
+import org.yardstickframework.*;
+import org.yardstickframework.gridgain.querymodel.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
+import java.util.concurrent.*;
 
-import static org.yardstickframework.BenchmarkUtils.println;
+import static org.yardstickframework.BenchmarkUtils.*;
 
 /**
  * GridGain benchmark that performs aggregation query operations.
