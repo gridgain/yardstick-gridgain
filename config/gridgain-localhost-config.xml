@@ -148,21 +148,6 @@
 
                     <property name="memoryMode" value="OFFHEAP_TIERED"/>
                 </bean>
-
-                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
-                    <property name="name" value="query-offheap-values"/>
-
-                    <property name="cacheMode" value="PARTITIONED"/>
-
-                    <property name="atomicityMode" value="ATOMIC"/>
-
-                    <property name="swapEnabled" value="false"/>
-
-                    <!-- Enable query indexing for query cache. -->
-                    <property name="queryIndexEnabled" value="true"/>
-
-                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
-                </bean>
             </list>
         </property>
 
