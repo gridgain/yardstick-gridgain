@@ -35,7 +35,7 @@
                         <value>org.yardstickframework.gridgain.querymodel.Person</value>
                         <value>org.yardstickframework.gridgain.querymodel.Organization</value>
                         <value>org.yardstickframework.gridgain.computemodel.SampleJob</value>
-                        <value>org.yardstickframework.gridgain.computemodel.SampleCallableJob</value>
+                        <value>org.yardstickframework.gridgain.computemodel.NoopCallable</value>
                         <value>org.yardstickframework.gridgain.computemodel.SampleRunnableJob</value>
                         <value>org.yardstickframework.gridgain.computemodel.SampleClosure</value>
                     </list>

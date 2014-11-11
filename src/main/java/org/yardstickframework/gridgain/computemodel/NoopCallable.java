@@ -20,8 +20,7 @@ import java.util.concurrent.*;
 /**
  * This class is stub implementation. It job does nothing.
  */
-public class SampleCallableJob implements Callable<Object>, Externalizable {
-
+public class NoopCallable implements Callable<Object>, Externalizable {
     /** {@inheritDoc} */
     @Override public Object call() {
         //No-op
@@ -37,5 +36,4 @@ public class SampleCallableJob implements Callable<Object>, Externalizable {
     @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         //No-op
     }
-
 }

@@ -26,26 +26,29 @@ import static org.gridgain.grid.compute.GridComputeJobResultPolicy.*;
  * Assigns each node {@link SampleJob "empty"} job.
  */
 public class SampleTask implements GridComputeTask<Object, Object> {
-
     /** {@inheritDoc} */
-    @Override public GridComputeJobResultPolicy result(GridComputeJobResult res, List<GridComputeJobResult> rcvd)
-            throws GridException {
+    @Override public GridComputeJobResultPolicy result(
+        GridComputeJobResult res,
+        List<GridComputeJobResult> rcvd
+    ) throws GridException {
         return WAIT;
     }
 
     /** {@inheritDoc} */
-    @Nullable @Override public Map<? extends GridComputeJob, GridNode> map(List<GridNode> subgrid, @Nullable Object arg)
-            throws GridException {
+    @Nullable @Override public Map<? extends GridComputeJob, GridNode> map(
+        List<GridNode> subgrid,
+        @Nullable Object arg
+    ) throws GridException {
         Map<GridComputeJob, GridNode> map = new HashMap<>(subgrid.size());
-        for (GridNode gridNode : subgrid) {
+
+        for (GridNode gridNode : subgrid)
             map.put(new SampleJob(), gridNode);
-        }
+
         return map;
     }
 
     /** {@inheritDoc} */
     @Nullable @Override public Object reduce(List<GridComputeJobResult> results) throws GridException {
-        //No-op
         return null;
     }
 }

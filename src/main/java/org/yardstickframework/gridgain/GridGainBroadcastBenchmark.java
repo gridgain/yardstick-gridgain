@@ -31,8 +31,8 @@ public class GridGainBroadcastBenchmark extends GridGainAbstractBenchmark {
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        grid().compute().broadcast(new SampleCallableJob()).get();
-        
+        grid().compute().broadcast(new NoopCallable()).get();
+
         return true;
     }
 }

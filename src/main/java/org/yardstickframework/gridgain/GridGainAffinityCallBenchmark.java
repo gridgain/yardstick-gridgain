@@ -14,10 +14,10 @@
 
 package org.yardstickframework.gridgain;
 
-import org.yardstickframework.*;
 import org.yardstickframework.gridgain.computemodel.*;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * GridGain benchmark that performs affinity call operations.
@@ -26,6 +26,9 @@ public class GridGainAffinityCallBenchmark extends GridGainAbstractBenchmark {
     /** */
     public static final String CACHE_NAME = "compute";
 
+    /**
+     *
+     */
     public GridGainAffinityCallBenchmark() {
         // Use cache "compute" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
@@ -33,18 +36,9 @@ public class GridGainAffinityCallBenchmark extends GridGainAbstractBenchmark {
     }
 
     /** {@inheritDoc} */
-    @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
-        super.setUp(cfg);
-        for (int i = 0; i < args.nodes() * 2; ++i) {
-            cache.putx(i, i);
-        }
-    }
-
-    /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        for (int key = 0; key < args.nodes() * 2; ++key) {
-            grid().compute().affinityCall(CACHE_NAME, key, new SampleCallableJob()).get();
-        }
+        grid().compute().affinityCall(CACHE_NAME, ThreadLocalRandom.current().nextInt(), new NoopCallable()).get();
+
         return true;
     }
 }

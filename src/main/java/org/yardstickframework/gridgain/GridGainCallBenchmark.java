@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class GridGainCallBenchmark extends GridGainAbstractBenchmark {
     /** */
-    private List<SampleCallableJob> calls;
+    private List<NoopCallable> calls;
 
     public GridGainCallBenchmark() {
         // Use cache "compute" for this benchmark. Configuration for the cache can be found
@@ -37,13 +37,13 @@ public class GridGainCallBenchmark extends GridGainAbstractBenchmark {
         super.setUp(cfg);
         calls = new ArrayList<>(args.nodes() * 2);
         for (int i = 0; i < args.nodes() * 2; ++i)
-            calls.add(new SampleCallableJob());
+            calls.add(new NoopCallable());
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         grid().compute().call(calls).get();
-        
+
         return true;
     }
 }
