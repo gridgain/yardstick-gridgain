@@ -12,39 +12,45 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute;
 
 import org.yardstickframework.*;
-import org.yardstickframework.gridgain.computemodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.compute.model.*;
 
 import java.util.*;
 
 /**
- * GridGain benchmark that performs affinity run operations.
+ * GridGain benchmark that performs apply operations.
  */
-public class GridGainAffinityRunBenchmark extends GridGainAbstractBenchmark {
-    /** */
-    public static final String CACHE_NAME = "compute";
+public class GridGainApplyBenchmark extends GridGainAbstractBenchmark {
+    /** Args for apply. */
+    private List<Integer> applyArgs;
 
-    public GridGainAffinityRunBenchmark() {
-        // Use cache "compute" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super(CACHE_NAME);
+    /**
+     * Use cache "compute" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
+     */
+    public GridGainApplyBenchmark() {
+        super("compute");
     }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
-        for (int i = 0; i < args.nodes() * 2; ++i) {
-            cache.putx(i, i);
-        }
+
+        assert args.jobs() > 0;
+
+        applyArgs = new ArrayList<>(args.jobs());
+
+        for (int i = 0; i < args.jobs(); ++i)
+            applyArgs.add(null);
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        for (int key = 0; key < args.nodes() * 2; ++key) {
-            grid().compute().affinityRun(CACHE_NAME, key, new SampleRunnableJob()).get();
-        }
+        grid().compute().apply(new NoopClosure(), applyArgs).get();
+        
         return true;
     }
 }

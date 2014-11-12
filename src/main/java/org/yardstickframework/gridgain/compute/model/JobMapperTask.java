@@ -12,7 +12,7 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain.computemodel;
+package org.yardstickframework.gridgain.compute.model;
 
 import org.gridgain.grid.*;
 import org.gridgain.grid.compute.*;
@@ -23,9 +23,21 @@ import java.util.*;
 import static org.gridgain.grid.compute.GridComputeJobResultPolicy.*;
 
 /**
- * Assigns each node {@link SampleJob "empty"} job.
+ * Assigns {@link NoopJob "empty"} job for each node.
  */
-public class SampleTask implements GridComputeTask<Object, Object> {
+public class JobMapperTask implements GridComputeTask<Object, Object> {
+    /** Number of jobs */
+    private int jobs;
+
+    /**
+     * @param jobs Number of jobs
+     */
+    public JobMapperTask(int jobs) {
+        assert jobs > 0;
+
+        this.jobs = jobs;
+    }
+
     /** {@inheritDoc} */
     @Override public GridComputeJobResultPolicy result(
         GridComputeJobResult res,
@@ -39,10 +51,13 @@ public class SampleTask implements GridComputeTask<Object, Object> {
         List<GridNode> subgrid,
         @Nullable Object arg
     ) throws GridException {
-        Map<GridComputeJob, GridNode> map = new HashMap<>(subgrid.size());
+        Map<GridComputeJob, GridNode> map = new HashMap<>((int)(subgrid.size() * jobs / 0.75));
 
-        for (GridNode gridNode : subgrid)
-            map.put(new SampleJob(), gridNode);
+        for (GridNode gridNode : subgrid) {
+            //assigns jobs for each node
+            for (int i = 0; i < jobs; ++i)
+                map.put(new NoopJob(), gridNode);
+        }
 
         return map;
     }

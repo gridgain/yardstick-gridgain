@@ -12,27 +12,25 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.cache;
 
 import org.gridgain.grid.cache.query.*;
-import org.gridgain.grid.dataload.*;
 import org.yardstickframework.*;
-import org.yardstickframework.gridgain.querymodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.cache.querymodel.*;
 
 import java.util.*;
 import java.util.concurrent.*;
 
-import static org.yardstickframework.BenchmarkUtils.*;
-
 /**
- * GridGain benchmark that performs query operations.
+ * GridGain benchmark that performs put and query operations.
  */
-public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
+public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
     /** */
-    public GridGainSqlQueryBenchmark() {
+    public GridGainSqlQueryPutBenchmark() {
         // Use cache "query" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
         super("query");
@@ -42,38 +40,32 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
 
-        println(cfg, "Populating query data...");
-
-        long start = System.nanoTime();
-
-        try (GridDataLoader<Integer, Person> dataLdr = grid().dataLoader(cache.name())) {
-            for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
-                dataLdr.addData(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
-
-                if (i % 100000 == 0)
-                    println(cfg, "Populated persons: " + i);
-            }
-        }
-
-        println(cfg, "Finished populating query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
-
         qry = cache.queries().createSqlQuery(Person.class, "salary >= ? and salary <= ?");
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
+        ThreadLocalRandom rnd = ThreadLocalRandom.current();
 
-        double maxSalary = salary + 1000;
+        if (rnd.nextBoolean()) {
+            double salary = rnd.nextDouble() * args.range() * 1000;
 
-        Collection<Map.Entry<Integer, Person>> entries = executeQuery(salary, maxSalary);
+            double maxSalary = salary + 1000;
 
-        for (Map.Entry<Integer, Person> entry : entries) {
-            Person p = entry.getValue();
+            Collection<Map.Entry<Integer, Person>> entries = executeQuery(salary, maxSalary);
 
-            if (p.getSalary() < salary || p.getSalary() > maxSalary)
-                throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                        ", person=" + p + ']');
+            for (Map.Entry<Integer, Person> entry : entries) {
+                Person p = entry.getValue();
+
+                if (p.getSalary() < salary || p.getSalary() > maxSalary)
+                    throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
+                            ", person=" + p + ']');
+            }
+        }
+        else {
+            int i = rnd.nextInt(args.range());
+
+            cache.putx(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
         }
 
         return true;

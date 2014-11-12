@@ -12,10 +12,11 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute;
 
 import org.yardstickframework.*;
-import org.yardstickframework.gridgain.computemodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.compute.model.*;
 
 import java.util.*;
 
@@ -23,21 +24,27 @@ import java.util.*;
  * GridGain benchmark that performs run operations.
  */
 public class GridGainRunBenchmark extends GridGainAbstractBenchmark {
-    /** */
+    /** Jobs for run */
     private List<Runnable> jobs;
 
+    /**
+     * Use cache "compute" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
+     */
     public GridGainRunBenchmark() {
-        // Use cache "task" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
         super("compute");
     }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
         super.setUp(cfg);
-        jobs = new ArrayList<>(args.nodes() * 2);
-        for (int i = 0; i < args.nodes() * 2; ++i)
-            jobs.add(new SampleRunnableJob());
+
+        assert args.jobs() > 0;
+
+        jobs = new ArrayList<>(args.jobs());
+
+        for (int i = 0; i < args.jobs(); ++i)
+            jobs.add(new NoopRunnable());
     }
 
     /** {@inheritDoc} */

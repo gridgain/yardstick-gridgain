@@ -12,9 +12,10 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute;
 
-import org.yardstickframework.gridgain.computemodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.compute.model.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -23,15 +24,14 @@ import java.util.concurrent.*;
  * GridGain benchmark that performs affinity call operations.
  */
 public class GridGainAffinityCallBenchmark extends GridGainAbstractBenchmark {
-    /** */
+    /** Cache name. */
     public static final String CACHE_NAME = "compute";
 
     /**
-     *
+     * Use cache "compute" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
      */
     public GridGainAffinityCallBenchmark() {
-        // Use cache "compute" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
         super(CACHE_NAME);
     }
 

@@ -12,28 +12,18 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain.computemodel;
-
-import org.gridgain.grid.*;
-import org.gridgain.grid.compute.*;
-import org.jetbrains.annotations.*;
+package org.yardstickframework.gridgain.compute.model;
 
 import java.io.*;
+import java.util.concurrent.*;
 
 /**
- * This class is stub implementation {@link GridComputeJob}. It job does nothing.
+ * This class is stub implementation. It job does nothing.
  */
-public class SampleJob implements GridComputeJob, Externalizable {
-
+public class NoopCallable implements Callable<Object>, Externalizable {
     /** {@inheritDoc} */
-    @Nullable @Override public Object execute() throws GridException {
-        //No-op
+    @Override public Object call() {
         return null;
-    }
-
-    /** {@inheritDoc} */
-    @Override public void cancel() {
-        //No-op
     }
 
     /** {@inheritDoc} */
@@ -45,5 +35,4 @@ public class SampleJob implements GridComputeJob, Externalizable {
     @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         //No-op
     }
-
 }

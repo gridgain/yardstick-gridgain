@@ -12,18 +12,18 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain.computemodel;
+package org.yardstickframework.gridgain.compute.model;
+
+import org.gridgain.grid.lang.*;
 
 import java.io.*;
-import java.util.concurrent.*;
 
 /**
  * This class is stub implementation. It job does nothing.
  */
-public class NoopCallable implements Callable<Object>, Externalizable {
+public class NoopClosure implements GridClosure<Integer, Object>, Externalizable {
     /** {@inheritDoc} */
-    @Override public Object call() {
-        //No-op
+    @Override public Object apply(Integer o) {
         return null;
     }
 

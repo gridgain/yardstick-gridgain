@@ -12,26 +12,29 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute;
 
-import org.yardstickframework.gridgain.computemodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.compute.model.*;
 
 import java.util.*;
 
 /**
- * GridGain benchmark that performs broadcast operations.
+ * GridGain benchmark that performs execute operations.
  */
-public class GridGainBroadcastBenchmark extends GridGainAbstractBenchmark {
+public class GridGainExecuteBenchmark extends GridGainAbstractBenchmark {
 
-    public GridGainBroadcastBenchmark() {
-        // Use cache "task" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
+    /**
+     * Use cache "compute" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
+     */
+    public GridGainExecuteBenchmark() {
         super("compute");
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        grid().compute().broadcast(new NoopCallable()).get();
+        grid().compute().execute(new JobMapperTask(args.jobs()), null).get();
 
         return true;
     }

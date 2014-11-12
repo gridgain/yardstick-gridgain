@@ -32,12 +32,12 @@
                 <property name="classNames">
                     <list>
                         <value>org.yardstickframework.gridgain.SampleValue</value>
-                        <value>org.yardstickframework.gridgain.querymodel.Person</value>
-                        <value>org.yardstickframework.gridgain.querymodel.Organization</value>
-                        <value>org.yardstickframework.gridgain.computemodel.SampleJob</value>
-                        <value>org.yardstickframework.gridgain.computemodel.NoopCallable</value>
-                        <value>org.yardstickframework.gridgain.computemodel.SampleRunnableJob</value>
-                        <value>org.yardstickframework.gridgain.computemodel.SampleClosure</value>
+                        <value>org.yardstickframework.gridgain.cache.querymodel.Person</value>
+                        <value>org.yardstickframework.gridgain.cache.querymodel.Organization</value>
+                        <value>org.yardstickframework.gridgain.compute.model.NoopJob</value>
+                        <value>org.yardstickframework.gridgain.compute.model.NoopCallable</value>
+                        <value>org.yardstickframework.gridgain.compute.model.NoopRunnable</value>
+                        <value>org.yardstickframework.gridgain.compute.model.NoopClosure</value>
                     </list>
                 </property>
             </bean>
