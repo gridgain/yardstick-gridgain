@@ -31,10 +31,11 @@ public class GridGainSqlQueryAvgBenchmark extends GridGainAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
-    /** */
+    /**
+     * Use cache "query" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
+     */
     public GridGainSqlQueryAvgBenchmark() {
-        // Use cache "query" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
         super("query");
     }
 
@@ -53,7 +54,9 @@ public class GridGainSqlQueryAvgBenchmark extends GridGainAbstractBenchmark {
 
         try (GridDataLoader<Integer, Person> dataLdr = grid().dataLoader(cache.name())) {
             for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
-                dataLdr.addData(i, new Person(i, "firstName" + i, "lastName" + i, i * 1000));
+                //salary will be firmly clamped in a range (0, 1000]
+                dataLdr.addData(i, new Person(i, "firstName" + i, "lastName" + i,
+                        ThreadLocalRandom.current().nextDouble() * 1000));
 
                 if (i % 100000 == 0)
                     println(cfg, "Populated persons: " + i);
@@ -62,33 +65,30 @@ public class GridGainSqlQueryAvgBenchmark extends GridGainAbstractBenchmark {
 
         println(cfg, "Finished populating query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
 
-        qry = cache.queries().createSqlFieldsQuery("select avg(salary) from Person where salary >= ? and salary <= ?");
+        qry = cache.queries().createSqlFieldsQuery("select avg(salary) from Person where salary >= ?");
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
+        //salary range (0, 1000]. Aggregation query will work with near half values.
+        double salary = ThreadLocalRandom.current().nextDouble(0.45, 0.55) * 1000;
 
-        double maxSalary = salary + 100 * 1000;
+        double avgSalary = executeQuery(salary);
 
-        double avgSalary = executeQuery(salary, maxSalary);
-
-        if (avgSalary < salary || avgSalary > maxSalary)
-            throw new Exception("Invalid avg salary calculated [min=" + salary + ", max=" + maxSalary +
-                    ", avg=" + avgSalary + ']');
+        if (avgSalary < salary)
+            throw new Exception("Invalid avg salary calculated [min=" + salary + ", avg=" + avgSalary + ']');
 
         return true;
     }
 
     /**
      * @param minSalary Min salary.
-     * @param maxSalary Max salary.
      * @return Avg salary.
      * @throws Exception If failed.
      */
-    private double executeQuery(double minSalary, double maxSalary) throws Exception {
+    private double executeQuery(double minSalary) throws Exception {
         GridCacheQuery<List<?>> q = (GridCacheQuery<List<?>>)qry;
 
-        return (Double) q.execute(minSalary, maxSalary).get().iterator().next().get(0);
+        return (Double) q.execute(minSalary).get().iterator().next().get(0);
     }
 }

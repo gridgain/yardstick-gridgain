@@ -27,14 +27,15 @@ import static org.yardstickframework.BenchmarkUtils.*;
 /**
  * GridGain benchmark that performs query operations.
  */
-public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
+public class GridGainSqlQueryFullScanBenchmark extends GridGainAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
-    /** */
-    public GridGainSqlQueryBenchmark() {
-        // Use cache "query" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
+    /**
+     * Use cache "query" for this benchmark. Configuration for the cache can be found
+     * in 'config/gridgain-config.xml' file.
+     */
+    public GridGainSqlQueryFullScanBenchmark() {
         super("query");
     }
 
@@ -57,37 +58,33 @@ public class GridGainSqlQueryBenchmark extends GridGainAbstractBenchmark {
 
         println(cfg, "Finished populating query data in " + ((System.nanoTime() - start) / 1_000_000) + " ms.");
 
-        qry = cache.queries().createSqlQuery(Person.class, "salary >= ? and salary <= ?");
+        qry = cache.queries().createSqlQuery(Person.class, "firstName like '%' || ? and  lastName like '%' || ?");
     }
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        double salary = ThreadLocalRandom.current().nextDouble() * args.range() * 1000;
+        String lastChar = Integer.toString(ThreadLocalRandom.current().nextInt(args.range()));
 
-        double maxSalary = salary + 1000;
-
-        Collection<Map.Entry<Integer, Person>> entries = executeQuery(salary, maxSalary);
+        Collection<Map.Entry<Integer, Person>> entries = executeQuery(lastChar);
 
         for (Map.Entry<Integer, Person> entry : entries) {
             Person p = entry.getValue();
 
-            if (p.getSalary() < salary || p.getSalary() > maxSalary)
-                throw new Exception("Invalid person retrieved [min=" + salary + ", max=" + maxSalary +
-                        ", person=" + p + ']');
+            if (!p.getLastName().endsWith(lastChar) || !p.getFirstName().endsWith(lastChar))
+                throw new Exception("Invalid person retrieved [lastChar=" + lastChar + ", person=" + p + ']');
         }
 
         return true;
     }
 
     /**
-     * @param minSalary Min salary.
-     * @param maxSalary Max salary.
+     * @param lastChar Last char into first name and last name.
      * @return Query result.
      * @throws Exception If failed.
      */
-    private Collection<Map.Entry<Integer, Person>> executeQuery(double minSalary, double maxSalary) throws Exception {
+    private Collection<Map.Entry<Integer, Person>> executeQuery(String lastChar) throws Exception {
         GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
-        return q.execute(minSalary, maxSalary).get();
+        return q.execute(lastChar, lastChar).get();
     }
 }

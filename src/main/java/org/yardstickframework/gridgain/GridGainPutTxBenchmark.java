@@ -27,11 +27,6 @@ public class GridGainPutTxBenchmark extends GridGainAbstractBenchmark {
         super("tx");
     }
 
-    /** */
-    protected GridGainPutTxBenchmark(String cacheName) {
-        super(cacheName);
-    }
-
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());
