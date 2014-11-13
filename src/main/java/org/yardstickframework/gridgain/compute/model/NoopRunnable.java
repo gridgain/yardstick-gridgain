@@ -17,7 +17,7 @@ package org.yardstickframework.gridgain.compute.model;
 import java.io.*;
 
 /**
- * This class is stub implementation. It job does nothing.
+ *
  */
 public class NoopRunnable implements Runnable, Externalizable {
     /** {@inheritDoc} */

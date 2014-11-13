@@ -21,7 +21,7 @@ import org.jetbrains.annotations.*;
 import java.io.*;
 
 /**
- * This class is stub implementation {@link GridComputeJob}. It job does nothing.
+ *
  */
 public class NoopJob implements GridComputeJob, Externalizable {
     /** {@inheritDoc} */

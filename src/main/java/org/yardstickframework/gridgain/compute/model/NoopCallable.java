@@ -18,7 +18,7 @@ import java.io.*;
 import java.util.concurrent.*;
 
 /**
- * This class is stub implementation. It job does nothing.
+ *
  */
 public class NoopCallable implements Callable<Object>, Externalizable {
     /** {@inheritDoc} */

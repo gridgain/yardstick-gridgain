@@ -19,7 +19,7 @@ import org.gridgain.grid.lang.*;
 import java.io.*;
 
 /**
- * This class is stub implementation. It job does nothing.
+ *
  */
 public class NoopClosure implements GridClosure<Integer, Object>, Externalizable {
     /** {@inheritDoc} */

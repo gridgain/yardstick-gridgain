@@ -23,7 +23,6 @@ import java.util.*;
  * GridGain benchmark that performs execute operations.
  */
 public class GridGainExecuteBenchmark extends GridGainAbstractBenchmark {
-
     /**
      * Use cache "compute" for this benchmark. Configuration for the cache can be found
      * in 'config/gridgain-config.xml' file.
@@ -34,7 +33,7 @@ public class GridGainExecuteBenchmark extends GridGainAbstractBenchmark {
 
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        grid().compute().execute(new JobMapperTask(args.jobs()), null).get();
+        grid().compute().execute(new NoopTask(args.jobs()), null).get();
 
         return true;
     }

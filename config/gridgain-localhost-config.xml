@@ -31,7 +31,7 @@
                 <property name="requireSerializable" value="true"/>
                 <property name="classNames">
                     <list>
-                        <value>org.yardstickframework.gridgain.SampleValue</value>
+                        <value>org.yardstickframework.gridgain.cache.SampleValue</value>
                         <value>org.yardstickframework.gridgain.cache.querymodel.Person</value>
                         <value>org.yardstickframework.gridgain.cache.querymodel.Organization</value>
                         <value>org.yardstickframework.gridgain.compute.model.NoopJob</value>

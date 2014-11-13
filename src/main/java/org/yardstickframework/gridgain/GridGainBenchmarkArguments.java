@@ -79,7 +79,7 @@ public class GridGainBenchmarkArguments {
     private int range = 1_000_000;
 
     /** */
-    @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs")
+    @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs for compute benchmarks")
     private int jobs = 10;
 
     /**

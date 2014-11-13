@@ -23,16 +23,16 @@ import java.util.*;
 import static org.gridgain.grid.compute.GridComputeJobResultPolicy.*;
 
 /**
- * Assigns {@link NoopJob "empty"} job for each node.
+ * Assigns {@link NoopJob} job for each node.
  */
-public class JobMapperTask implements GridComputeTask<Object, Object> {
+public class NoopTask implements GridComputeTask<Object, Object> {
     /** Number of jobs */
     private int jobs;
 
     /**
      * @param jobs Number of jobs
      */
-    public JobMapperTask(int jobs) {
+    public NoopTask(int jobs) {
         assert jobs > 0;
 
         this.jobs = jobs;
