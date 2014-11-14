@@ -15,7 +15,6 @@
 package org.yardstickframework.gridgain;
 
 import org.gridgain.grid.*;
-import org.gridgain.grid.cache.*;
 import org.gridgain.grid.events.*;
 import org.gridgain.grid.lang.*;
 import org.yardstickframework.*;
@@ -30,24 +29,11 @@ import static org.yardstickframework.BenchmarkUtils.*;
  * Abstract class for GridGain benchmarks.
  */
 public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
-    /** Cache name. */
-    private final String cacheName;
-
     /** Arguments. */
     protected final GridGainBenchmarkArguments args = new GridGainBenchmarkArguments();
 
     /** Node. */
     private GridGainNode node;
-
-    /** Cache. */
-    protected GridCache<Integer, Object> cache;
-
-    /**
-     * @param cacheName Cache name.
-     */
-    protected GridGainAbstractBenchmark(String cacheName) {
-        this.cacheName = cacheName;
-    }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
@@ -63,10 +49,6 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
         else
             // Support for mixed benchmarks mode.
             node = new GridGainNode(args.distributionMode() == CLIENT_ONLY, GridGain.grid());
-
-        cache = node.grid().cache(cacheName);
-
-        assert cache != null;
 
         waitForNodes();
     }

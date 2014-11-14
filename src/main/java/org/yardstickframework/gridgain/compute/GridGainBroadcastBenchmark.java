@@ -23,14 +23,6 @@ import java.util.*;
  * GridGain benchmark that performs broadcast operations.
  */
 public class GridGainBroadcastBenchmark extends GridGainAbstractBenchmark {
-    /**
-     * Use cache "task" for this benchmark. Configuration for the cache can be found
-     * in 'config/gridgain-config.xml' file.
-     */
-    public GridGainBroadcastBenchmark() {
-        super("compute");
-    }
-
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         grid().compute().broadcast(new NoopCallable()).get();

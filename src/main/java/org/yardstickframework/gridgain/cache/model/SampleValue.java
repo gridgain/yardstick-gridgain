@@ -12,7 +12,7 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain.cache;
+package org.yardstickframework.gridgain.cache.model;
 
 import java.io.*;
 

@@ -16,8 +16,8 @@ package org.yardstickframework.gridgain.compute;
 
 import org.yardstickframework.*;
 import org.yardstickframework.gridgain.*;
-import org.yardstickframework.gridgain.compute.model.*;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -26,14 +26,6 @@ import java.util.*;
 public class GridGainRunBenchmark extends GridGainAbstractBenchmark {
     /** Jobs for run */
     private List<Runnable> jobs;
-
-    /**
-     * Use cache "compute" for this benchmark. Configuration for the cache can be found
-     * in 'config/gridgain-config.xml' file.
-     */
-    public GridGainRunBenchmark() {
-        super("compute");
-    }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
@@ -52,5 +44,25 @@ public class GridGainRunBenchmark extends GridGainAbstractBenchmark {
         grid().compute().run(jobs).get();
         
         return true;
+    }
+
+    /**
+     *
+     */
+    public static class NoopRunnable implements Runnable, Externalizable {
+        /** {@inheritDoc} */
+        @Override public void run() {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void writeExternal(ObjectOutput out) throws IOException {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+            //No-op
+        }
     }
 }

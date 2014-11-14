@@ -14,21 +14,15 @@
 
 package org.yardstickframework.gridgain.cache;
 
-import org.yardstickframework.gridgain.*;
+import org.gridgain.grid.cache.*;
+import org.yardstickframework.gridgain.cache.model.*;
 
 import java.util.*;
 
 /**
  * GridGain benchmark that performs put and get operations.
  */
-public class GridGainPutGetBenchmark extends GridGainAbstractBenchmark {
-    /** */
-    public GridGainPutGetBenchmark() {
-        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("atomic");
-    }
-
+public class GridGainPutGetBenchmark extends GridGainCacheAbstractBenchmark {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());
@@ -41,5 +35,10 @@ public class GridGainPutGetBenchmark extends GridGainAbstractBenchmark {
         cache.putx(key, new SampleValue(key));
 
         return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("atomic");
     }
 }

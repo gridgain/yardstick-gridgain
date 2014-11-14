@@ -18,6 +18,7 @@ import org.gridgain.grid.*;
 import org.gridgain.grid.compute.*;
 import org.jetbrains.annotations.*;
 
+import java.io.*;
 import java.util.*;
 
 import static org.gridgain.grid.compute.GridComputeJobResultPolicy.*;
@@ -65,5 +66,30 @@ public class NoopTask implements GridComputeTask<Object, Object> {
     /** {@inheritDoc} */
     @Nullable @Override public Object reduce(List<GridComputeJobResult> results) throws GridException {
         return null;
+    }
+
+    /**
+     *
+     */
+    public static class NoopJob implements GridComputeJob, Externalizable {
+        /** {@inheritDoc} */
+        @Nullable @Override public Object execute() throws GridException {
+            return null;
+        }
+
+        /** {@inheritDoc} */
+        @Override public void cancel() {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void writeExternal(ObjectOutput out) throws IOException {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+            //No-op
+        }
     }
 }

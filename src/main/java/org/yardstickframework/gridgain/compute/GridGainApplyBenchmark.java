@@ -14,10 +14,11 @@
 
 package org.yardstickframework.gridgain.compute;
 
+import org.gridgain.grid.lang.*;
 import org.yardstickframework.*;
 import org.yardstickframework.gridgain.*;
-import org.yardstickframework.gridgain.compute.model.*;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -26,14 +27,6 @@ import java.util.*;
 public class GridGainApplyBenchmark extends GridGainAbstractBenchmark {
     /** Args for apply. */
     private List<Integer> applyArgs;
-
-    /**
-     * Use cache "compute" for this benchmark. Configuration for the cache can be found
-     * in 'config/gridgain-config.xml' file.
-     */
-    public GridGainApplyBenchmark() {
-        super("compute");
-    }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
@@ -52,5 +45,25 @@ public class GridGainApplyBenchmark extends GridGainAbstractBenchmark {
         grid().compute().apply(new NoopClosure(), applyArgs).get();
         
         return true;
+    }
+
+    /**
+     *
+     */
+    public static class NoopClosure implements GridClosure<Integer, Object>, Externalizable {
+        /** {@inheritDoc} */
+        @Override public Object apply(Integer o) {
+            return null;
+        }
+
+        /** {@inheritDoc} */
+        @Override public void writeExternal(ObjectOutput out) throws IOException {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+            //No-op
+        }
     }
 }

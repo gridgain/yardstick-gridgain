@@ -15,26 +15,26 @@
 package org.yardstickframework.gridgain.cache;
 
 import org.gridgain.grid.cache.*;
-import org.yardstickframework.gridgain.cache.model.*;
-
-import java.util.*;
+import org.yardstickframework.*;
+import org.yardstickframework.gridgain.*;
 
 /**
- * GridGain benchmark that performs transactional put operations.
+ * Abstract class for GridGain benchmarks which use cache.
  */
-public class GridGainPutTxBenchmark extends GridGainCacheAbstractBenchmark {
-    /** {@inheritDoc} */
-    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(args.range());
-
-        // Implicit transaction is used.
-        cache.putx(key, new SampleValue(key));
-
-        return true;
-    }
+public abstract class GridGainCacheAbstractBenchmark extends GridGainAbstractBenchmark {
+    /** Cache. */
+    protected GridCache<Integer, Object> cache;
 
     /** {@inheritDoc} */
-    @Override protected GridCache<Integer, Object> cache() {
-        return grid().cache("tx");
+    @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
+        super.setUp(cfg);
+
+        cache = cache();
     }
+
+    /**
+     * Each benchmark must determine which cache will be used.
+     * @return GridCache cache
+     */
+    protected abstract GridCache<Integer, Object> cache();
 }
