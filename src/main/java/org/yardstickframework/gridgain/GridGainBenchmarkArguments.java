@@ -78,6 +78,10 @@ public class GridGainBenchmarkArguments {
     @Parameter(names = {"-r", "--range"}, description = "Key range")
     private int range = 1_000_000;
 
+    /** */
+    @Parameter(names = {"-ps", "--pageSize"}, description = "Query page size")
+    private int pageSize = 1024;
+
     /**
      * @return Transaction concurrency.
      */
@@ -174,6 +178,13 @@ public class GridGainBenchmarkArguments {
      */
     public int range() {
         return range;
+    }
+
+    /**
+     * @return Query page size.
+     */
+    public int pageSize() {
+        return pageSize;
     }
 
     /**
