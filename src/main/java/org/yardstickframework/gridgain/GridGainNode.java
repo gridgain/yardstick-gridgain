@@ -92,10 +92,10 @@ public class GridGainNode implements BenchmarkServer {
             if (args.isOffHeap()) {
                 cc.setOffHeapMaxMemory(0);
 
-                if (args.isOffheapTiered())
-                    cc.setMemoryMode(OFFHEAP_TIERED);
-                else
+                if (args.isOffheapValues())
                     cc.setMemoryMode(OFFHEAP_VALUES);
+                else
+                    cc.setEvictionPolicy(new GridCacheLruEvictionPolicy(50000));
             }
 
             cc.setDefaultTxConcurrency(args.txConcurrency());

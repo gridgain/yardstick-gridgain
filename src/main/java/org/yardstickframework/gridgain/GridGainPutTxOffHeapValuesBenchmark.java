@@ -14,34 +14,17 @@
 
 package org.yardstickframework.gridgain;
 
-import java.util.*;
+import org.gridgain.grid.cache.*;
 
 /**
- * GridGain benchmark that performs get operations.
+ * GridGain benchmark that performs transactional put operations
+ * with {@link GridCacheMemoryMode#OFFHEAP_VALUES OFFHEAP VALUES} memory mode.
  */
-public class GridGainGetBenchmark extends GridGainAbstractBenchmark {
-    /**
-     *
-     */
-    public GridGainGetBenchmark() {
-        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
+public class GridGainPutTxOffHeapValuesBenchmark extends GridGainPutTxBenchmark {
+    /** */
+    public GridGainPutTxOffHeapValuesBenchmark() {
+        // Use cache "tx-offheap-values" for this benchmark. Configuration for the cache can be found
         // in 'config/gridgain-config.xml' file.
-        super("atomic");
-    }
-
-    /**
-     * @param cacheName
-     */
-    protected GridGainGetBenchmark(String cacheName) {
-        super(cacheName);
-    }
-
-    /** {@inheritDoc} */
-    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(args.range());
-
-        cache.get(key);
-
-        return true;
+        super("tx-offheap-values");
     }
 }
