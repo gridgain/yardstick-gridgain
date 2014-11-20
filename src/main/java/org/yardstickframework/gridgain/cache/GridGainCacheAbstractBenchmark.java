@@ -34,7 +34,8 @@ public abstract class GridGainCacheAbstractBenchmark extends GridGainAbstractBen
 
     /**
      * Each benchmark must determine which cache will be used.
-     * @return GridCache cache
+     *
+     * @return GridCache Cache to use.
      */
     protected abstract GridCache<Integer, Object> cache();
 }
