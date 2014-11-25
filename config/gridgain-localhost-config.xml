@@ -98,6 +98,10 @@
             </bean>
         </property>
 
+        <property name="warmupClosure">
+            <bean class="org.yardstickframework.gridgain.GridGainPutGetWarmupClosure"/>
+        </property>
+
         <property name="discoverySpi">
             <bean class="org.gridgain.grid.spi.discovery.tcp.GridTcpDiscoverySpi">
                 <property name="ipFinder">
