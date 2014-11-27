@@ -21,81 +21,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-    <bean id="grid.cfg" class="org.gridgain.grid.GridConfiguration" scope="singleton">
-        <property name="peerClassLoadingEnabled" value="false"/>
+    <import resource="gridgain-base-config.xml"/>
 
-        <property name="marshaller">
-            <bean class="org.gridgain.grid.marshaller.optimized.GridOptimizedMarshaller">
-                <property name="requireSerializable" value="true"/>
-                <property name="classNames">
-                    <list>
-                        <value>org.yardstickframework.gridgain.SampleValue</value>
-                        <value>org.yardstickframework.gridgain.querymodel.Person</value>
-                        <value>org.yardstickframework.gridgain.querymodel.Organization</value>
-                    </list>
-                </property>
-            </bean>
-        </property>
-
-        <property name="cacheConfiguration">
-            <list>
-                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
-                    <property name="name" value="atomic"/>
-
-                    <property name="cacheMode" value="PARTITIONED"/>
-
-                    <property name="atomicityMode" value="ATOMIC"/>
-
-                    <property name="swapEnabled" value="false"/>
-
-                    <property name="queryIndexEnabled" value="false"/>
-                </bean>
-
-                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
-                    <property name="name" value="tx"/>
-
-                    <property name="cacheMode" value="PARTITIONED"/>
-
-                    <property name="atomicityMode" value="TRANSACTIONAL"/>
-
-                    <property name="swapEnabled" value="false"/>
-
-                    <property name="queryIndexEnabled" value="false"/>
-                </bean>
-
-                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
-                    <property name="name" value="query"/>
-
-                    <property name="cacheMode" value="PARTITIONED"/>
-
-                    <property name="atomicityMode" value="ATOMIC"/>
-
-                    <property name="swapEnabled" value="false"/>
-
-                    <!-- Enable query indexing for query cache. -->
-                    <property name="queryIndexEnabled" value="true"/>
-                </bean>
-            </list>
-        </property>
-
-        <property name="restEnabled" value="false"/>
-
-        <property name="includeEventTypes">
-            <list/>
-        </property>
-
-        <property name="loadBalancingSpi">
-            <bean class="org.gridgain.grid.spi.loadbalancing.roundrobin.GridRoundRobinLoadBalancingSpi">
-                <property name="perTask" value="false"/>
-            </bean>
-        </property>
-
-        <property name="communicationSpi">
-            <bean class="org.gridgain.grid.spi.communication.tcp.GridTcpCommunicationSpi">
-                <property name="sharedMemoryPort" value="-1"/>
-            </bean>
-        </property>
-
+    <bean id="grid.cfg" class="org.gridgain.grid.GridConfiguration" parent="base-grid.cfg">
         <property name="discoverySpi">
             <bean class="org.gridgain.grid.spi.discovery.tcp.GridTcpDiscoverySpi">
                 <property name="ipFinder">

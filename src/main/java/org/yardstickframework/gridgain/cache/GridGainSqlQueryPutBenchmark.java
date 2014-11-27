@@ -12,11 +12,12 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.cache;
 
+import org.gridgain.grid.cache.*;
 import org.gridgain.grid.cache.query.*;
 import org.yardstickframework.*;
-import org.yardstickframework.gridgain.querymodel.*;
+import org.yardstickframework.gridgain.cache.model.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -24,16 +25,9 @@ import java.util.concurrent.*;
 /**
  * GridGain benchmark that performs put and query operations.
  */
-public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
+public class GridGainSqlQueryPutBenchmark extends GridGainCacheAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
-
-    /** */
-    public GridGainSqlQueryPutBenchmark() {
-        // Use cache "query" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("query");
-    }
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
@@ -80,5 +74,10 @@ public class GridGainSqlQueryPutBenchmark extends GridGainAbstractBenchmark {
         GridCacheQuery<Map.Entry<Integer, Person>> q = (GridCacheQuery<Map.Entry<Integer, Person>>)qry;
 
         return q.execute(minSalary, maxSalary).get();
+    }
+
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("query");
     }
 }

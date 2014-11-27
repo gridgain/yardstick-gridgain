@@ -12,31 +12,20 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute;
+
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.compute.model.*;
 
 import java.util.*;
 
 /**
- * GridGain benchmark that performs put and get operations.
+ * GridGain benchmark that performs broadcast operations.
  */
-public class GridGainPutGetBenchmark extends GridGainAbstractBenchmark {
-    /** */
-    public GridGainPutGetBenchmark() {
-        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("atomic");
-    }
-
+public class GridGainBroadcastBenchmark extends GridGainAbstractBenchmark {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(args.range());
-
-        Object val = cache.get(key);
-
-        if (val != null)
-            key = nextRandom(args.range());
-
-        cache.putx(key, new SampleValue(key));
+        grid().compute().broadcast(new NoopCallable()).get();
 
         return true;
     }

@@ -12,38 +12,29 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.cache;
 
 import org.gridgain.grid.cache.*;
+import org.yardstickframework.gridgain.cache.model.*;
 
 import java.util.*;
 
 /**
- * GridGain benchmark that performs transactional put and get operations.
+ * GridGain benchmark that performs transactional put operations.
  */
-public class GridGainPutGetTxBenchmark extends GridGainAbstractBenchmark {
-    /** */
-    public GridGainPutGetTxBenchmark() {
-        // Use cache "tx" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("tx");
+public class GridGainPutTxBenchmark extends GridGainCacheAbstractBenchmark {
+    /** {@inheritDoc} */
+    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
+        int key = nextRandom(args.range());
+
+        // Implicit transaction is used.
+        cache.putx(key, new SampleValue(key));
+
+        return true;
     }
 
     /** {@inheritDoc} */
-    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(0, args.range() / 2);
-
-        try (GridCacheTx tx = cache.txStart()) {
-            Object val = cache.get(key);
-
-            if (val != null)
-                key = nextRandom(args.range() / 2, args.range());
-
-            cache.putx(key, new SampleValue(key));
-
-            tx.commit();
-        }
-
-        return true;
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("tx");
     }
 }

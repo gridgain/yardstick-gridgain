@@ -12,27 +12,27 @@
  limitations under the License.
  */
 
-package org.yardstickframework.gridgain;
+package org.yardstickframework.gridgain.compute.model;
 
-import java.util.*;
+import java.io.*;
+import java.util.concurrent.*;
 
 /**
- * GridGain benchmark that performs put operations.
+ *
  */
-public class GridGainPutBenchmark extends GridGainAbstractBenchmark {
-    /** */
-    public GridGainPutBenchmark() {
-        // Use cache "atomic" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("atomic");
+public class NoopCallable implements Callable<Object>, Externalizable {
+    /** {@inheritDoc} */
+    @Override public Object call() {
+        return null;
     }
 
     /** {@inheritDoc} */
-    @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        int key = nextRandom(args.range());
+    @Override public void writeExternal(ObjectOutput out) throws IOException {
+        //No-op
+    }
 
-        cache.putx(key, new SampleValue(key));
-
-        return true;
+    /** {@inheritDoc} */
+    @Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        //No-op
     }
 }

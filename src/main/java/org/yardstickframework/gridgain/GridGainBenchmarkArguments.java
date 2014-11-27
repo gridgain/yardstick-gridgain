@@ -78,6 +78,10 @@ public class GridGainBenchmarkArguments {
     @Parameter(names = {"-r", "--range"}, description = "Key range")
     private int range = 1_000_000;
 
+    /** */
+    @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs for compute benchmarks")
+    private int jobs = 10;
+
     /**
      * @return Transaction concurrency.
      */
@@ -181,6 +185,13 @@ public class GridGainBenchmarkArguments {
      */
     public String configuration() {
         return ggcfg;
+    }
+
+    /**
+     * @return Number of jobs
+     */
+    public int jobs() {
+        return jobs;
     }
 
     /**
