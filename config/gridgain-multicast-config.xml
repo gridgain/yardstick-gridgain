@@ -37,6 +37,18 @@
             </bean>
         </property>
 
+        <property name="indexingSpi">
+            <list>
+                <bean class="org.gridgain.grid.spi.indexing.h2.GridH2IndexingSpi">
+                    <property name="name" value="offheap"/>
+                    <property name="maxOffHeapMemory" value="#{500*1024*1024}"/>
+                </bean>
+                <bean class="org.gridgain.grid.spi.indexing.h2.GridH2IndexingSpi">
+                    <property name="name" value="default"/>
+                </bean>
+            </list>
+        </property>
+
         <property name="cacheConfiguration">
             <list>
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -130,6 +142,8 @@
 
                     <!-- Enable query indexing for query cache. -->
                     <property name="queryIndexEnabled" value="true"/>
+
+                    <property name="indexingSpiName" value="default"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -145,6 +159,8 @@
                     <property name="queryIndexEnabled" value="true"/>
 
                     <property name="memoryMode" value="OFFHEAP_TIERED"/>
+
+                    <property name="indexingSpiName" value="offheap"/>
                 </bean>
             </list>
         </property>
