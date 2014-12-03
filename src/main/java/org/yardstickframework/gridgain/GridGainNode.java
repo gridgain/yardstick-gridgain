@@ -70,8 +70,7 @@ public class GridGainNode implements BenchmarkServer {
         for (GridCacheConfiguration cc : c.getCacheConfiguration()) {
             // GridGainNode can not run in CLIENT_ONLY mode,
             // except the case when it's used inside GridGainAbstractBenchmark.
-            GridCacheDistributionMode distroMode = args.distributionMode() == CLIENT_ONLY && !clientMode ?
-                PARTITIONED_ONLY : args.distributionMode();
+            GridCacheDistributionMode distroMode = clientMode ? CLIENT_ONLY : args.distributionMode();
 
             cc.setWriteSynchronizationMode(args.syncMode());
             cc.setDistributionMode(distroMode);

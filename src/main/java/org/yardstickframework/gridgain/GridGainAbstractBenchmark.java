@@ -42,13 +42,13 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
         jcommander(cfg.commandLineArguments(), args, "<gridgain-driver>");
 
         if (GridGain.state() != GridGainState.STARTED) {
-            node = new GridGainNode(args.distributionMode() == CLIENT_ONLY);
+            node = new GridGainNode(true);
 
             node.start(cfg);
         }
         else
             // Support for mixed benchmarks mode.
-            node = new GridGainNode(args.distributionMode() == CLIENT_ONLY, GridGain.grid());
+            node = new GridGainNode(true, GridGain.grid());
 
         waitForNodes();
     }
