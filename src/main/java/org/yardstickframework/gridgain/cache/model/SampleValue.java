@@ -14,12 +14,14 @@
 
 package org.yardstickframework.gridgain.cache.model;
 
+import org.gridgain.grid.portables.*;
+
 import java.io.*;
 
 /**
  * Entity class for benchmark.
  */
-public class SampleValue implements Externalizable {
+public class SampleValue implements Externalizable, GridPortableMarshalAware {
     /** */
     private int id;
 
@@ -40,6 +42,16 @@ public class SampleValue implements Externalizable {
      */
     public int id() {
         return id;
+    }
+
+    /** {@inheritDoc} */
+    @Override public void writePortable(GridPortableWriter writer) throws GridPortableException {
+        writer.writeInt("id", id);
+    }
+
+    /** {@inheritDoc} */
+    @Override public void readPortable(GridPortableReader reader) throws GridPortableException {
+        id = reader.readInt("id");
     }
 
     /** {@inheritDoc} */

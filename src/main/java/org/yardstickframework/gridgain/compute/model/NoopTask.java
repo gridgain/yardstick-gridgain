@@ -16,6 +16,10 @@ package org.yardstickframework.gridgain.compute.model;
 
 import org.gridgain.grid.*;
 import org.gridgain.grid.compute.*;
+import org.gridgain.grid.portables.GridPortableException;
+import org.gridgain.grid.portables.GridPortableMarshalAware;
+import org.gridgain.grid.portables.GridPortableReader;
+import org.gridgain.grid.portables.GridPortableWriter;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -71,7 +75,17 @@ public class NoopTask implements GridComputeTask<Object, Object> {
     /**
      *
      */
-    public static class NoopJob implements GridComputeJob, Externalizable {
+    public static class NoopJob implements GridComputeJob, Externalizable, GridPortableMarshalAware {
+        /** {@inheritDoc} */
+        @Override public void writePortable(GridPortableWriter writer) throws GridPortableException {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void readPortable(GridPortableReader reader) throws GridPortableException {
+            //No-op
+        }
+
         /** {@inheritDoc} */
         @Nullable @Override public Object execute() throws GridException {
             return null;

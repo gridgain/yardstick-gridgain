@@ -15,6 +15,10 @@
 package org.yardstickframework.gridgain.compute;
 
 import org.gridgain.grid.lang.*;
+import org.gridgain.grid.portables.GridPortableException;
+import org.gridgain.grid.portables.GridPortableMarshalAware;
+import org.gridgain.grid.portables.GridPortableReader;
+import org.gridgain.grid.portables.GridPortableWriter;
 import org.yardstickframework.*;
 import org.yardstickframework.gridgain.*;
 
@@ -50,7 +54,17 @@ public class GridGainApplyBenchmark extends GridGainAbstractBenchmark {
     /**
      *
      */
-    public static class NoopClosure implements GridClosure<Integer, Object>, Externalizable {
+    public static class NoopClosure implements GridClosure<Integer, Object>, Externalizable, GridPortableMarshalAware {
+        /** {@inheritDoc} */
+        @Override public void writePortable(GridPortableWriter writer) throws GridPortableException {
+            //No-op
+        }
+
+        /** {@inheritDoc} */
+        @Override public void readPortable(GridPortableReader reader) throws GridPortableException {
+            //No-op
+        }
+
         /** {@inheritDoc} */
         @Override public Object apply(Integer o) {
             return null;
