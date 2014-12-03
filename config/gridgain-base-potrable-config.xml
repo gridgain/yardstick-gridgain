@@ -58,6 +58,8 @@
                     <property name="queryIndexEnabled" value="false"/>
 
                     <property name="portableEnabled" value="true"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -72,6 +74,8 @@
                     <property name="queryIndexEnabled" value="false"/>
 
                     <property name="portableEnabled" value="true"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -99,6 +103,8 @@
                     <property name="queryIndexEnabled" value="false"/>
 
                     <property name="portableEnabled" value="true"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
             </list>
         </property>

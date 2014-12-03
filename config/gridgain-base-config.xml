@@ -53,6 +53,8 @@
                     <property name="swapEnabled" value="false"/>
 
                     <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -65,6 +67,8 @@
                     <property name="swapEnabled" value="false"/>
 
                     <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -90,6 +94,8 @@
                     <property name="swapEnabled" value="false"/>
 
                     <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="distributionMode" value="CLIENT_ONLY"/>
                 </bean>
             </list>
         </property>
