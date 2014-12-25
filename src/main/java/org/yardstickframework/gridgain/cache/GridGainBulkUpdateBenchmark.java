@@ -59,7 +59,7 @@ public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<
         try (GridCacheTx tx = cache().txStart(PESSIMISTIC, REPEATABLE_READ)) {
             final Map<String, BigDecimal> oldVals = cache().getAll(changesMap.keySet());
 
-            final Map<String, BigDecimal> newVals = new HashMap<>(oldVals.size());
+            final Map<String, BigDecimal> newVals = new TreeMap<>();
 
             for (Map.Entry<String, BigDecimal> ent : oldVals.entrySet())
                 newVals.put(ent.getKey(), ent.getValue().add(changesMap.get(ent.getKey())));
