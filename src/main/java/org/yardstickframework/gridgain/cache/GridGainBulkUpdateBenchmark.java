@@ -21,7 +21,9 @@ import org.yardstickframework.*;
 import java.math.*;
 import java.util.*;
 
-import static org.yardstickframework.BenchmarkUtils.println;
+import static org.gridgain.grid.cache.GridCacheTxConcurrency.*;
+import static org.gridgain.grid.cache.GridCacheTxIsolation.*;
+import static org.yardstickframework.BenchmarkUtils.*;
 
 /**
  * GridGain benchmark that performs bulk update operation.
@@ -54,7 +56,7 @@ public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         Map<String, BigDecimal> changesMap = generateBatch();
 
-        try (GridCacheTx tx = cache().txStart()) {
+        try (GridCacheTx tx = cache().txStart(PESSIMISTIC, REPEATABLE_READ)) {
             final Map<String, BigDecimal> oldVals = cache().getAll(changesMap.keySet());
 
             final Map<String, BigDecimal> newVals = new HashMap<>(oldVals.size());
