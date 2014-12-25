@@ -59,9 +59,8 @@ public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<
 
             final Map<String, BigDecimal> newVals = new HashMap<>(oldVals.size());
 
-            for (Map.Entry<String, BigDecimal> ent: oldVals.entrySet()) {
+            for (Map.Entry<String, BigDecimal> ent: oldVals.entrySet())
                 newVals.put(ent.getKey(), ent.getValue().add(changesMap.get(ent.getKey())));
-            }
 
             cache().putAll(newVals);
 

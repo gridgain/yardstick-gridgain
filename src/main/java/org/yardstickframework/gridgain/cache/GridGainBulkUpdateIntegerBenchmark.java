@@ -14,14 +14,12 @@
 
 package org.yardstickframework.gridgain.cache;
 
-import org.gridgain.grid.cache.GridCache;
-import org.gridgain.grid.cache.GridCacheTx;
-import org.gridgain.grid.dataload.GridDataLoader;
-import org.yardstickframework.BenchmarkConfiguration;
+import org.gridgain.grid.cache.*;
+import org.gridgain.grid.dataload.*;
+import org.yardstickframework.*;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.math.*;
+import java.util.*;
 
 import static org.yardstickframework.BenchmarkUtils.println;
 
@@ -61,9 +59,8 @@ public class GridGainBulkUpdateIntegerBenchmark extends GridGainCacheAbstractBen
 
             final Map<Integer, BigDecimal> newVals = new HashMap<>(oldVals.size());
 
-            for (Map.Entry<Integer, BigDecimal> ent: oldVals.entrySet()) {
+            for (Map.Entry<Integer, BigDecimal> ent: oldVals.entrySet())
                 newVals.put(ent.getKey(), ent.getValue().add(changesMap.get(ent.getKey())));
-            }
 
             cache().putAll(newVals);
 
