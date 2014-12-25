@@ -21,9 +21,9 @@ import org.yardstickframework.gridgain.*;
 /**
  * Abstract class for GridGain benchmarks which use cache.
  */
-public abstract class GridGainCacheAbstractBenchmark extends GridGainAbstractBenchmark {
+public abstract class GridGainCacheAbstractBenchmark<K, V> extends GridGainAbstractBenchmark {
     /** Cache. */
-    protected GridCache<Integer, Object> cache;
+    protected GridCache<K, V> cache;
 
     /** {@inheritDoc} */
     @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
@@ -37,5 +37,5 @@ public abstract class GridGainCacheAbstractBenchmark extends GridGainAbstractBen
      *
      * @return GridCache Cache to use.
      */
-    protected abstract GridCache<Integer, Object> cache();
+    protected abstract GridCache<K, V> cache();
 }

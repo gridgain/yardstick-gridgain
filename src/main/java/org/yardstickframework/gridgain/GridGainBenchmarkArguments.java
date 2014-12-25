@@ -79,8 +79,19 @@ public class GridGainBenchmarkArguments {
     private int range = 1_000_000;
 
     /** */
+    @Parameter(names = {"-bth", "--batch"}, description = "Batch size")
+    private int batch = 10000;
+
+    /** */
     @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs for compute benchmarks")
     private int jobs = 10;
+
+    /**
+     * @return Batch size.
+     */
+    public int batchSize(){
+        return batch;
+    }
 
     /**
      * @return Transaction concurrency.

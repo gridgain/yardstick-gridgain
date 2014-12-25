@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * GridGain benchmark that performs put and get operations.
  */
-public class GridGainPutGetBenchmark extends GridGainCacheAbstractBenchmark {
+public class GridGainPutGetBenchmark extends GridGainCacheAbstractBenchmark<Integer, Object> {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());

@@ -28,7 +28,7 @@ import static org.yardstickframework.BenchmarkUtils.*;
 /**
  * GridGain benchmark that performs query operations with joins.
  */
-public class GridGainSqlQueryJoinBenchmark extends GridGainCacheAbstractBenchmark {
+public class GridGainSqlQueryJoinBenchmark extends GridGainCacheAbstractBenchmark<Integer, Object> {
     /** */
     private GridCacheQuery qry;
 

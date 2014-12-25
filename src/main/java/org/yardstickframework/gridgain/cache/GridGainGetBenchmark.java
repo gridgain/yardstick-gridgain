@@ -21,7 +21,7 @@ import java.util.*;
 /**
  * GridGain benchmark that performs get operations.
  */
-public class GridGainGetBenchmark extends GridGainCacheAbstractBenchmark {
+public class GridGainGetBenchmark extends GridGainCacheAbstractBenchmark<Integer, Object> {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(args.range());

@@ -25,7 +25,7 @@ import java.util.concurrent.*;
 /**
  * GridGain benchmark that performs put and query operations.
  */
-public class GridGainSqlQueryPutBenchmark extends GridGainCacheAbstractBenchmark {
+public class GridGainSqlQueryPutBenchmark extends GridGainCacheAbstractBenchmark<Integer, Object> {
     /** */
     private GridCacheQuery qry;
 

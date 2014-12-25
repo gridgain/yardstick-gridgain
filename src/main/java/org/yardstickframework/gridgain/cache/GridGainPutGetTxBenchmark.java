@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * GridGain benchmark that performs transactional put and get operations.
  */
-public class GridGainPutGetTxBenchmark extends GridGainCacheAbstractBenchmark {
+public class GridGainPutGetTxBenchmark extends GridGainCacheAbstractBenchmark<Integer, Object> {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         int key = nextRandom(0, args.range() / 2);
