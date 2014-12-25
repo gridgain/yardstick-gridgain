@@ -30,6 +30,8 @@ public abstract class GridGainCacheAbstractBenchmark<K, V> extends GridGainAbstr
         super.setUp(cfg);
 
         cache = cache();
+
+        BenchmarkUtils.println("Starting benchmark: " + cfg);
     }
 
     /**
