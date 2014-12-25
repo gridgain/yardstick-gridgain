@@ -27,7 +27,7 @@ import static org.yardstickframework.BenchmarkUtils.println;
  * GridGain benchmark that performs bulk update operation with integer key.
  */
 public class GridGainBulkUpdateIntegerBenchmark extends GridGainCacheAbstractBenchmark<Integer, BigDecimal> {
-
+    /** */
     public static final int SHIFT = 1_000_000;
 
     /** {@inheritDoc} */
@@ -71,15 +71,15 @@ public class GridGainBulkUpdateIntegerBenchmark extends GridGainCacheAbstractBen
     }
 
     /**
-     * @return Batch
+     * @return Batch.
      */
     private Map<Integer, BigDecimal> generateBatch() {
-        Map<Integer, BigDecimal> batch = new HashMap<>();
+        SortedMap<Integer, BigDecimal> batch = new TreeMap<>();
 
         while (batch.size() < args.batchSize()) {
             int key = nextRandom(SHIFT, SHIFT + args.range());
 
-            batch.put(key, BigDecimal.valueOf(nextRandom(SHIFT, SHIFT + args.range())));
+            batch.put(key, BigDecimal.valueOf(nextRandom(1000)));
         }
 
         return batch;

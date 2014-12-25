@@ -27,7 +27,7 @@ import static org.yardstickframework.BenchmarkUtils.println;
  * GridGain benchmark that performs bulk update operation.
  */
 public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<String, BigDecimal> {
-
+    /** */
     public static final int SHIFT = 1_000_000;
 
     /** {@inheritDoc} */
@@ -59,7 +59,7 @@ public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<
 
             final Map<String, BigDecimal> newVals = new HashMap<>(oldVals.size());
 
-            for (Map.Entry<String, BigDecimal> ent: oldVals.entrySet())
+            for (Map.Entry<String, BigDecimal> ent : oldVals.entrySet())
                 newVals.put(ent.getKey(), ent.getValue().add(changesMap.get(ent.getKey())));
 
             cache().putAll(newVals);
@@ -71,15 +71,15 @@ public class GridGainBulkUpdateBenchmark extends GridGainCacheAbstractBenchmark<
     }
 
     /**
-     * @return Batch
+     * @return Batch.
      */
     private Map<String, BigDecimal> generateBatch() {
-        Map<String, BigDecimal> batch = new HashMap<>();
+        SortedMap<String, BigDecimal> batch = new TreeMap<>();
 
         while (batch.size() < args.batchSize()) {
             String key = String.valueOf(nextRandom(SHIFT, SHIFT + args.range()));
 
-            batch.put(key, BigDecimal.valueOf(nextRandom(SHIFT, SHIFT + args.range())));
+            batch.put(key, BigDecimal.valueOf(nextRandom(1000)));
         }
 
         return batch;

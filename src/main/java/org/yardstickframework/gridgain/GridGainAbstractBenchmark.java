@@ -122,6 +122,6 @@ public abstract class GridGainAbstractBenchmark extends BenchmarkDriverAdapter {
      * @return Next key.
      */
     protected int nextRandom(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(max - min) + min;
+        return ThreadLocalRandom.current().nextInt(min, max);
     }
 }
