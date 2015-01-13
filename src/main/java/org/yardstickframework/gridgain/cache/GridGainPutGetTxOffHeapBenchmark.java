@@ -23,10 +23,8 @@ import java.util.*;
  * with {@link GridCacheMemoryMode#OFFHEAP_TIERED OFFHEAP TIERED} memory mode.
  */
 public class GridGainPutGetTxOffHeapBenchmark extends GridGainPutGetTxBenchmark {
-    /** */
-    public GridGainPutGetTxOffHeapBenchmark() {
-        // Use cache "tx-offheap" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("tx-offheap");
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("tx-offheap");
     }
 }

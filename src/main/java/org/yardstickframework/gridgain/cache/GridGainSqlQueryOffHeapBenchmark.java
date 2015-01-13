@@ -21,10 +21,8 @@ import org.gridgain.grid.cache.*;
  * memory mode.
  */
 public class GridGainSqlQueryOffHeapBenchmark extends GridGainSqlQueryBenchmark {
-    /** */
-    public GridGainSqlQueryOffHeapBenchmark() {
-        // Use cache "query-offheap" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("query-offheap");
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("query-offheap");
     }
 }

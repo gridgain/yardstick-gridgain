@@ -14,11 +14,12 @@
 
 package org.yardstickframework.gridgain.cache;
 
+import org.gridgain.grid.cache.GridCache;
 import org.gridgain.grid.cache.query.*;
-import org.gridgain.grid.dataload.*;
+import org.gridgain.grid.dataload.GridDataLoader;
 import org.yardstickframework.*;
-import org.yardstickframework.gridgain.GridGainAbstractBenchmark;
-import org.yardstickframework.gridgain.querymodel.*;
+import org.yardstickframework.gridgain.*;
+import org.yardstickframework.gridgain.cache.model.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -28,20 +29,13 @@ import static org.yardstickframework.BenchmarkUtils.*;
 /**
  * GridGain benchmark that performs aggregation query operations.
  */
-public class GridGainSqlQueryAvgBenchmark extends GridGainAbstractBenchmark {
+public class GridGainSqlQueryAvgBenchmark extends GridGainCacheAbstractBenchmark {
     /** */
     private GridCacheQuery qry;
 
-    /** */
-    public GridGainSqlQueryAvgBenchmark() {
-        // Use cache "query" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("query");
-    }
-
-    /** */
-    protected GridGainSqlQueryAvgBenchmark(String cacheName) {
-        super(cacheName);
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("query");
     }
 
     /** {@inheritDoc} */

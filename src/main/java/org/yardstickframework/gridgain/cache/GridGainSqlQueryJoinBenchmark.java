@@ -112,6 +112,6 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainCacheAbstractBenchmar
 
     /** {@inheritDoc} */
     @Override protected GridCache<Integer, Object> cache() {
-        return grid().cache("query-o");
+        return grid().cache("query");
     }
 }

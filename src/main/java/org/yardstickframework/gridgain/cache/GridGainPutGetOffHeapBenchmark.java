@@ -23,10 +23,8 @@ import java.util.*;
  * memory mode.
  */
 public class GridGainPutGetOffHeapBenchmark extends GridGainPutGetBenchmark {
-    /** */
-    public GridGainPutGetOffHeapBenchmark() {
-        // Use cache "atomic-offheap" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("atomic-offheap");
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("atomic-offheap");
     }
 }

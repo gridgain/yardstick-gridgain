@@ -21,12 +21,8 @@ import org.gridgain.grid.cache.*;
  * memory mode.
  */
 public class GridGainGetOffHeapBenchmark extends GridGainGetBenchmark {
-    /**
-     *
-     */
-    public GridGainGetOffHeapBenchmark() {
-        // Use cache "atomic-offheap" for this benchmark. Configuration for the cache can be found
-        // in 'config/gridgain-config.xml' file.
-        super("atomic-offheap");
+    /** {@inheritDoc} */
+    @Override protected GridCache<Integer, Object> cache() {
+        return grid().cache("atomic-offheap");
     }
 }
