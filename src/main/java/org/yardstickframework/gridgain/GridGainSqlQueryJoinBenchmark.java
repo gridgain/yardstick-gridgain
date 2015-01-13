@@ -62,8 +62,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
             // Populate persons.
             for (int i = orgRange; i < orgRange + args.range() && !Thread.currentThread().isInterrupted(); i++) {
-                Person p =
-                    new Person(i, ThreadLocalRandom.current().nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
+                Person p = new Person(i, nextRandom(orgRange), "firstName" + i, "lastName" + i, (i - orgRange) * 1000);
 
                 dataLdr.addData(i, p);
 
@@ -76,8 +75,10 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
 
         qry = cache.queries().createSqlFieldsQuery(
             "select p.id, p.orgId, p.firstName, p.lastName, p.salary, o.name " +
-                "from Person p, Organization o " +
-                "where p.id = o.id and salary >= ? and salary <= ?");
+                "from Person p " +
+                "left join Organization o " +
+                "on p.id = o.id " +
+                "where salary >= ? and salary <= ?");
     }
 
     /** {@inheritDoc} */
