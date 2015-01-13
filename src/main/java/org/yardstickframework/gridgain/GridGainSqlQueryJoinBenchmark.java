@@ -61,7 +61,7 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainAbstractBenchmark {
             dataLdr.flush();
 
             // Populate persons.
-            for (int i = 0; i < args.range() && !Thread.currentThread().isInterrupted(); i++) {
+            for (int i = orgRange; i < orgRange + args.range() && !Thread.currentThread().isInterrupted(); i++) {
                 Person p =
                     new Person(i, ThreadLocalRandom.current().nextInt(orgRange), "firstName" + i, "lastName" + i, i * 1000);
 
