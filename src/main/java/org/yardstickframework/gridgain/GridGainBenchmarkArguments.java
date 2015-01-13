@@ -79,8 +79,8 @@ public class GridGainBenchmarkArguments {
     private int range = 1_000_000;
 
     /** */
-    @Parameter(names = {"-ps", "--pageSize"}, description = "Query page size")
-    private int pageSize = 1024;
+    @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs for compute benchmarks")
+    private int jobs = 10;
 
     /**
      * @return Transaction concurrency.
@@ -181,17 +181,17 @@ public class GridGainBenchmarkArguments {
     }
 
     /**
-     * @return Query page size.
-     */
-    public int pageSize() {
-        return pageSize;
-    }
-
-    /**
      * @return Configuration file.
      */
     public String configuration() {
         return ggcfg;
+    }
+
+    /**
+     * @return Number of jobs
+     */
+    public int jobs() {
+        return jobs;
     }
 
     /**
