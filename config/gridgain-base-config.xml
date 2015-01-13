@@ -41,6 +41,16 @@
             </bean>
         </property>
 
+        <property name="portableConfiguration">
+            <bean class="org.gridgain.grid.portables.GridPortableConfiguration">
+                <property name="classNames">
+                    <list>
+                        <value>org.yardstickframework.gridgain.cache.model.PortableSampleValue</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
         <property name="cacheConfiguration">
             <list>
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -53,6 +63,22 @@
                     <property name="swapEnabled" value="false"/>
 
                     <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="atomic-portable"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="portableEnabled" value="true"/>
+
+                    <property name="keepPortableInStore" value="true"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
