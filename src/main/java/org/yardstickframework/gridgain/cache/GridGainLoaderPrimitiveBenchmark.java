@@ -28,9 +28,9 @@ public class GridGainLoaderPrimitiveBenchmark extends GridGainLoaderAbstractBenc
             lastKey = identityGenerator.getAndIncrement();
 
         for (int i = 0; i < args.range(); i++) {
-            dataLoader.addData(lastKey, lastKey);
-
             lastKey += cfg.threads();
+
+            dataLoader.addData(lastKey, lastKey);
         }
 
         ctx.put(0, lastKey);
