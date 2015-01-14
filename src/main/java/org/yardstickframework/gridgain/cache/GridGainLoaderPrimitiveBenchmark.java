@@ -14,34 +14,12 @@
 
 package org.yardstickframework.gridgain.cache;
 
-import org.gridgain.grid.cache.*;
-import org.gridgain.grid.dataload.*;
-import org.yardstickframework.*;
-
 import java.util.*;
-import java.util.concurrent.atomic.*;
 
 /**
  * GridGain benchmark that performs data loader operations.
  */
-public class GridGainLoaderPrimitiveBenchmark extends GridGainCacheAbstractBenchmark {
-    /** */
-    private GridDataLoader<Integer, Integer> dataLoader;
-
-    /** */
-    private AtomicInteger identityGenerator = new AtomicInteger(0);
-
-    /** {@inheritDoc} */
-    @Override public void setUp(BenchmarkConfiguration cfg) throws Exception {
-        super.setUp(cfg);
-
-        dataLoader = grid().dataLoader(cache.name());
-
-        dataLoader.perNodeParallelLoadOperations(2);
-
-        dataLoader.perNodeBufferSize(1000);
-    }
-
+public class GridGainLoaderPrimitiveBenchmark extends GridGainLoaderAbstractBenchmark<Integer, Integer> {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
         Integer lastKey = (Integer) ctx.get(0);
@@ -49,7 +27,7 @@ public class GridGainLoaderPrimitiveBenchmark extends GridGainCacheAbstractBench
         if (lastKey == null)
             lastKey = identityGenerator.getAndIncrement();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < args.range(); i++) {
             dataLoader.addData(lastKey, lastKey);
 
             lastKey += cfg.threads();
@@ -58,15 +36,5 @@ public class GridGainLoaderPrimitiveBenchmark extends GridGainCacheAbstractBench
         ctx.put(0, lastKey);
 
         return true;
-    }
-
-    /** {@inheritDoc} */
-    @Override public void tearDown() throws Exception {
-        dataLoader.close();
-    }
-
-    /** {@inheritDoc} */
-    @Override protected GridCache<Integer, Object> cache() {
-        return grid().cache("atomic-portable");
     }
 }
