@@ -41,6 +41,18 @@
             </bean>
         </property>
 
+        <property name="indexingSpi">
+            <list>
+                <bean class="org.gridgain.grid.spi.indexing.h2.GridH2IndexingSpi">
+                    <property name="name" value="offheap"/>
+                    <property name="maxOffHeapMemory" value="#{500*1024*1024}"/>
+                </bean>
+                <bean class="org.gridgain.grid.spi.indexing.h2.GridH2IndexingSpi">
+                    <property name="name" value="default"/>
+                </bean>
+            </list>
+        </property>
+
         <property name="cacheConfiguration">
             <list>
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
@@ -51,6 +63,34 @@
                     <property name="atomicityMode" value="ATOMIC"/>
 
                     <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="atomic-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="atomic-offheap-values"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
 
                     <property name="queryIndexEnabled" value="false"/>
                 </bean>
@@ -68,6 +108,35 @@
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="tx-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="tx-offheap-values"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="TRANSACTIONAL"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <property name="queryIndexEnabled" value="false"/>
+
+                    <property name="memoryMode" value="OFFHEAP_VALUES"/>
+                </bean>
+
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
                     <property name="name" value="query"/>
 
                     <property name="cacheMode" value="PARTITIONED"/>
@@ -78,6 +147,25 @@
 
                     <!-- Enable query indexing for query cache. -->
                     <property name="queryIndexEnabled" value="true"/>
+
+                    <property name="indexingSpiName" value="default"/>
+                </bean>
+
+                <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
+                    <property name="name" value="query-offheap"/>
+
+                    <property name="cacheMode" value="PARTITIONED"/>
+
+                    <property name="atomicityMode" value="ATOMIC"/>
+
+                    <property name="swapEnabled" value="false"/>
+
+                    <!-- Enable query indexing for query cache. -->
+                    <property name="queryIndexEnabled" value="true"/>
+
+                    <property name="memoryMode" value="OFFHEAP_TIERED"/>
+
+                    <property name="indexingSpiName" value="offheap"/>
                 </bean>
 
                 <bean class="org.gridgain.grid.cache.GridCacheConfiguration">
