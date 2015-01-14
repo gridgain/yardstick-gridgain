@@ -24,9 +24,6 @@ public class PortableSampleValue implements GridPortableMarshalAware {
     private int id;
 
     /** */
-    private String value;
-
-    /** */
     public PortableSampleValue() {
         // No-op.
     }
@@ -35,11 +32,9 @@ public class PortableSampleValue implements GridPortableMarshalAware {
      * Constructor.
      *
      * @param id Id.
-     * @param value Value.
      */
-    public PortableSampleValue(int id, String value) {
+    public PortableSampleValue(int id) {
         this.id = id;
-        this.value = value;
     }
 
     /**
@@ -49,27 +44,18 @@ public class PortableSampleValue implements GridPortableMarshalAware {
         return id;
     }
 
-    /**
-     * @return Value.
-     */
-    public String value() {
-        return value;
-    }
-
     /** {@inheritDoc} */
     @Override public void writePortable(GridPortableWriter writer) throws GridPortableException {
         writer.writeInt("id", id);
-        writer.writeString("value", value);
     }
 
     /** {@inheritDoc} */
     @Override public void readPortable(GridPortableReader reader) throws GridPortableException {
         id = reader.readInt("id");
-        value = reader.readString("value");
     }
 
     /** {@inheritDoc} */
     @Override public String toString() {
-        return "Value [id=" + id + " value=" + value + ']';
+        return "Value [id=" + id + ']';
     }
 }
