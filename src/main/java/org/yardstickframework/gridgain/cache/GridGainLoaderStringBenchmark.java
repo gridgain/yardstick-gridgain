@@ -22,13 +22,27 @@ import java.util.*;
 public class GridGainLoaderStringBenchmark extends GridGainLoaderAbstractBenchmark<String, String> {
     /** {@inheritDoc} */
     @Override public boolean test(Map<Object, Object> ctx) throws Exception {
-        Integer lastKey = (Integer) ctx.get(0);
+        Integer lastKey = (Integer)ctx.get(0);
+        Integer min = (Integer)ctx.get(1);
+        Integer max = (Integer)ctx.get(2);
 
-        if (lastKey == null)
+        if (lastKey == null) {
             lastKey = identityGenerator.getAndIncrement();
 
+            min = lastKey * 100000;
+            max = min + 100000;
+
+            ctx.put(1, min);
+            ctx.put(2, max);
+
+            lastKey = min;
+        }
+
         for (int i = 0; i < args.range(); i++) {
-            lastKey += cfg.threads();
+            ++lastKey;
+
+            if (lastKey > max)
+                lastKey = min + 1;
 
             dataLoader.addData(lastKey.toString(), lastKey.toString());
         }
