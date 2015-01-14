@@ -37,7 +37,7 @@ public class GridGainLoaderPrimitiveBenchmark extends GridGainCacheAbstractBench
 
         dataLoader = grid().dataLoader(cache.name());
 
-        dataLoader.perNodeParallelLoadOperations(4);
+        dataLoader.perNodeParallelLoadOperations(2);
 
         dataLoader.perNodeBufferSize(1000);
     }
