@@ -64,10 +64,10 @@ public class GridGainSqlQueryJoinBenchmark extends GridGainCacheAbstractBenchmar
 
         qry = cache.queries().createSqlFieldsQuery(
             "select p.id, p.orgId, p.firstName, p.lastName, p.salary, o.name " +
-                "from Person p " +
-                "left join Organization o " +
-                "on p.id = o.id " +
-                "where salary >= ? and salary <= ?");
+            "from Person p " +
+            "left join Organization o " +
+            "on p.id = o.id " +
+            "where salary >= ? and salary <= ?");
     }
 
     /** {@inheritDoc} */
