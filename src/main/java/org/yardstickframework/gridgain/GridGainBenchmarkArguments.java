@@ -82,6 +82,18 @@ public class GridGainBenchmarkArguments {
     @Parameter(names = {"-j", "--jobs"}, description = "Number of jobs for compute benchmarks")
     private int jobs = 10;
 
+    /** */
+    @Parameter(names = {"-cn", "--cacheName"}, description = "Cache name to use in benchmarks")
+    private String cacheName;
+
+    /** */
+    @Parameter(names = {"-bch", "--batchSize"}, description = "Batch size")
+    private int batchSize = 1_000;
+
+    /** */
+    @Parameter(names = {"-col", "--collocated"}, description = "Collocated")
+    private boolean collocated;
+
     /**
      * @return Transaction concurrency.
      */
@@ -192,6 +204,27 @@ public class GridGainBenchmarkArguments {
      */
     public int jobs() {
         return jobs;
+    }
+
+    /**
+     * @return Cache name.
+     */
+    public String cacheName() {
+        return cacheName;
+    }
+
+    /**
+     * @return Batch size.
+     */
+    public int batchSize() {
+        return batchSize;
+    }
+
+    /**
+     * @return Collocated flag.
+     */
+    public boolean collocated() {
+        return collocated;
     }
 
     /**
